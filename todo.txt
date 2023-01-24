@@ -1,8 +1,17 @@
+General
+-------
+Finish reading oh-my-posh documentation
+Make an oh-my-posh theme
+Learn how to specify parameters to winget packages when installing
+
+
+
 Shells To Try
 -------------
 Clink
 Yori
 Starship
+Nushell
 
 
 
