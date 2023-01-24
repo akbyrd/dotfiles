@@ -1,1 +1,0 @@
-winget Microsoft.Windows.Terminal
