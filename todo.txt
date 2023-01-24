@@ -1,0 +1,11 @@
+Shells To Try
+-------------
+Clink
+Yori
+Starship
+
+
+
+Keybindings
+-----------
+pwsh - ctrl+, - open profile in code
