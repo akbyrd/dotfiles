@@ -33,6 +33,7 @@ Install-Module posh-git
 Install-Module Terminal-Icons -Repository PSGallery
 $ompTheme = (Split-Path $Profile) + "\oh-my-posh-theme.omp.json"
 New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
+.$Profile
 
 Install-Module PSWinGlue
 Import-Module PSWinGlue

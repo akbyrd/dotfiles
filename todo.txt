@@ -3,6 +3,7 @@ General
 Finish reading oh-my-posh documentation
 Make an oh-my-posh theme
 Copy Argus profile
+Experiement with powershell extension. Might need to copy profile there too
 Learn how to specify parameters to winget packages when installing
 Can we iterate available fonts with curl?
 Anything we can do about UAC prompts?
