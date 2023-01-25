@@ -8,20 +8,33 @@ winget install -s winget -e Spotify.Spotify
 winget install -s winget -e Valve.Steam
 winget install -s winget -e VideoLAN.VLC
 
-# Development
-winget install -s winget -e Microsoft.PowerShell
+# Development - General
 winget install -s winget -e Microsoft.VisualStudio.2022.Community
 winget install -s winget -e Microsoft.VisualStudioCode
 winget install -s winget -e Microsoft.Windows.Terminal
 winget install -s winget -e TortoiseGit.TortoiseGit
 winget install -s winget -e TortoiseSVN.TortoiseSVN
+winget install -s winget -e WinMerge.WinMerge
 
-# Development - Terminal Extras
+# Development - Terminal
+$terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Stop-Process -Name WindowsTerminal
+Remove-Item $terminalSettings
+New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
+
+# Development - PowerShell
+winget install -s winget -e Microsoft.PowerShell
+New-Item -ItemType HardLink -Force -Path $Profile -Target res/pwsh-profile.ps1
+Update-Help
+
+# Development - PowerShell Appearance
 winget install -s winget -e JanDeDobbeleer.OhMyPosh
 Install-Module posh-git
-Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module Terminal-Icons -Repository PSGallery
+$ompTheme = (Split-Path $Profile) + "\oh-my-posh-theme.omp.json"
+New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
 
-Install-Module -Name PSWinGlue
+Install-Module PSWinGlue
 Import-Module PSWinGlue
 ./fonts.ps1
 foreach ($font in $fonts)
@@ -32,11 +45,7 @@ foreach ($font in $fonts)
 	curl -Lo $font.file $path
 	Remove-Item $font.file
 }
-
-# TODO: Anything we can do about UAC prompts?
-# TODO: Copy pwsh profile
-# TODO: Copy oh-my-posh profile
-# TODO: Copy windows-terminal profile
+Uninstall-Module PSWinGlue
 
 # No Packages (23-01-23)
 # MSI Afterburner

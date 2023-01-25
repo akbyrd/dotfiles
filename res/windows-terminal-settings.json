@@ -1,14 +1,14 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
             "command": "find",
             "keys": "ctrl+shift+f"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "openSettings",
                 "target": "settingsFile"
@@ -16,7 +16,7 @@
             "keys": "ctrl+comma"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "copy",
                 "singleLine": false
@@ -24,7 +24,7 @@
             "keys": "ctrl+c"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "prevTab"
             },
@@ -35,7 +35,7 @@
             "keys": "ctrl+v"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -44,14 +44,14 @@
             "keys": "alt+shift+d"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "quakeMode"
             },
             "keys": "ctrl+shift+c"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "newTab"
             },
@@ -86,7 +86,7 @@
             "keys": "alt+up"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "openSettings",
                 "target": "defaultsFile"
@@ -98,7 +98,7 @@
             "keys": "ctrl+p"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "openSettings",
                 "target": "settingsUI"
@@ -106,7 +106,7 @@
             "keys": "ctrl+alt+comma"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "nextTab"
             },
@@ -117,7 +117,7 @@
             "keys": "ctrl+shift+w"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "down"
@@ -125,7 +125,7 @@
             "keys": "ctrl+alt+down"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -133,7 +133,7 @@
             "keys": "ctrl+alt+up"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -141,7 +141,7 @@
             "keys": "ctrl+alt+left"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -155,17 +155,17 @@
     "disableAnimations": false,
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
-            "font": 
+            "font":
             {
                 "face": "CaskaydiaCove NFM"
             },
             "opacity": 75
         },
-        "list": 
+        "list":
         [
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -192,7 +192,7 @@
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#0C0C0C",
