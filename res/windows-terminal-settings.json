@@ -4,8 +4,15 @@
     "actions":
     [
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command":
+            {
+                "action": "prevTab"
+            },
+            "keys": "alt+left"
         },
         {
             "command":
@@ -18,21 +25,14 @@
         {
             "command":
             {
-                "action": "prevTab"
-            },
-            "keys": "alt+left"
-        },
-        {
-            "command":
-            {
                 "action": "openSettings",
                 "target": "settingsFile"
             },
             "keys": "ctrl+comma"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "command": "paste",
+            "keys": "ctrl+v"
         },
         {
             "command":
@@ -46,16 +46,16 @@
         {
             "command":
             {
-                "action": "newTab"
+                "action": "quakeMode"
             },
-            "keys": "ctrl+n"
+            "keys": "ctrl+shift+c"
         },
         {
             "command":
             {
-                "action": "quakeMode"
+                "action": "newTab"
             },
-            "keys": "ctrl+shift+c"
+            "keys": "ctrl+n"
         },
         {
             "command": "closePane",
@@ -164,7 +164,8 @@
             "colorScheme": "Campbell",
             "font":
             {
-                "face": "Inconsolata NF"
+                "face": "Inconsolata NF",
+                "size": 10
             },
             "opacity": 80,
             "useAcrylic": false

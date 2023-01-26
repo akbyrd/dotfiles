@@ -1,8 +1,7 @@
 General
 -------
-Sync terminal keybindings in vscode. Something got lost
-	Add ctrl+alt+, to open settings in vscode
-pwsh keybinding to reload profile
+pwsh keybinding - open settings file
+pwsh keybinding - reload profile
 Copy Argus profile
 Improve search highlight in vs theme
 Improve hiding the find widget in the terminal
