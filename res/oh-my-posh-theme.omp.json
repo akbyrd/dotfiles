@@ -33,14 +33,6 @@
 					}
 				},
 				{
-					"type": "session",
-					"style": "powerline",
-					"powerline_symbol": "\ue0b0",
-					"foreground": "#4e4e4e",
-					"background": "#e4e4e4",
-					"template": " {{ .UserName }} "
-				},
-				{
 					"type": "path",
 					"style": "powerline",
 					"powerline_symbol": "\ue0b0",

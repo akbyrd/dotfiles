@@ -1,10 +1,16 @@
 General
 -------
+Sync terminal keybindings in vscode. Something got lost
+	Add ctrl+alt+, to open settings in vscode
+pwsh keybinding to reload profile
+Copy Argus profile
+Improve search highlight in vs theme
+Improve hiding the find widget in the terminal
+Measure and optimize powershell startup time (omp seems super slow)
 Hard linking terminal settings does not work
 	The file is replaced when saving settings
 	Devs claim smylinking should work
 	https://github.com/microsoft/terminal/issues/14730
-Copy Argus profile
 Experiement with powershell extension. Might need to copy profile there too
 Learn how to specify parameters to winget packages when installing
 Can we iterate available fonts with curl?
