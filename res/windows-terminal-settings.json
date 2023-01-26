@@ -4,16 +4,8 @@
     "actions":
     [
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
-            "command":
-            {
-                "action": "openSettings",
-                "target": "settingsFile"
-            },
-            "keys": "ctrl+comma"
+            "command": "paste",
+            "keys": "ctrl+v"
         },
         {
             "command":
@@ -31,8 +23,16 @@
             "keys": "alt+left"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command":
+            {
+                "action": "openSettings",
+                "target": "settingsFile"
+            },
+            "keys": "ctrl+comma"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command":
@@ -46,16 +46,16 @@
         {
             "command":
             {
-                "action": "quakeMode"
+                "action": "newTab"
             },
-            "keys": "ctrl+shift+c"
+            "keys": "ctrl+n"
         },
         {
             "command":
             {
-                "action": "newTab"
+                "action": "quakeMode"
             },
-            "keys": "ctrl+n"
+            "keys": "ctrl+shift+c"
         },
         {
             "command": "closePane",
@@ -86,16 +86,16 @@
             "keys": "alt+up"
         },
         {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+p"
+        },
+        {
             "command":
             {
                 "action": "openSettings",
                 "target": "defaultsFile"
             },
             "keys": "ctrl+shift+comma"
-        },
-        {
-            "command": "openNewTabDropdown",
-            "keys": "ctrl+p"
         },
         {
             "command":
@@ -149,46 +149,58 @@
             "keys": "ctrl+alt+right"
         }
     ],
+    "alwaysShowTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "disableAnimations": false,
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
+    "firstWindowPreference": "persistedWindowLayout",
     "profiles":
     {
         "defaults":
         {
+            "colorScheme": "Campbell",
             "font":
             {
-                "face": "CaskaydiaCove NFM"
+                "face": "Inconsolata NF"
             },
-            "opacity": 75
+            "opacity": 80,
+            "useAcrylic": false
         },
         "list":
         [
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Command Prompt"
             },
             {
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Git Bash",
                 "source": "Git"
-            },
-            {
-                "guid": "{5b1ee4d3-8ba8-5088-beb0-7a9eca7972c1}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": true,
+                "name": "Windows PowerShell"
+            },
+            {
+                "colorScheme": "Campbell",
+                "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu",
+                "guid": "{97a7af9c-c5d1-4b23-b131-1e6a1a0e4426}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "Ubuntu",
+                "startingDirectory": "~"
             }
         ]
     },
@@ -379,6 +391,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -402,7 +437,8 @@
             "yellow": "#808000"
         }
     ],
+    "showTabsInTitlebar": true,
     "startOnUserLogin": true,
     "tabSwitcherMode": "disabled",
-    "useAcrylicInTabRow": false
+    "useAcrylicInTabRow": true
 }

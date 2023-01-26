@@ -1,6 +1,5 @@
 General
 -------
-Change font to Inconsolata
 Hard linking terminal settings does not work
 	The file is replaced when saving settings
 	Devs claim smylinking should work

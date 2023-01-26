@@ -2,6 +2,8 @@
 # * Must be run on the same drive as Windows to create hard links
 # * Must be run as admin to symlink terminal settings
 
+#Requires -RunAsAdministrator
+
 # Standard
 winget install -s winget -e 7zip.7zip
 winget install -s winget -e Argotronic.ArgusMonitor
@@ -45,9 +47,10 @@ Import-Module PSWinGlue
 foreach ($font in $fonts)
 {
 	$baseURL = "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/"
-	$path = $baseURL + $font.name + "/" + $font.folder + "/complete/" + $font.file
+	$path = $baseURL + $font.name + "/complete/" + $font.file
 	$path = $path.replace(" ", "%20")
 	curl -Lo $font.file $path
+	Install-Font $font.file -Scope User -Method Shell
 	Remove-Item $font.file
 }
 Uninstall-Module PSWinGlue
