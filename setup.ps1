@@ -1,3 +1,7 @@
+# Requirements
+# * Must be run on the same drive as Windows to create hard links
+# * Must be run as admin to symlink terminal settings
+
 # Standard
 winget install -s winget -e 7zip.7zip
 winget install -s winget -e Argotronic.ArgusMonitor
