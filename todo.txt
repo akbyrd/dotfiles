@@ -2,9 +2,12 @@ General
 -------
 pwsh keybinding - open settings file
 pwsh keybinding - reload profile
+pwsh keybinding - open oh-my-posh theme
 Copy Argus profile
 Improve search highlight in vs theme
 Improve hiding the find widget in the terminal
+Make a full pass over vscode keybindings
+Consider using terminal editors in vscode
 Measure and optimize powershell startup time (omp seems super slow)
 Hard linking terminal settings does not work
 	The file is replaced when saving settings
@@ -23,9 +26,3 @@ Clink
 Yori
 Starship
 Nushell
-
-
-
-Keybindings
------------
-pwsh - ctrl+, - open profile in code

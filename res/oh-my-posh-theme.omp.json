@@ -10,7 +10,7 @@
 				{
 					"type": "os",
 					"style": "diamond",
-					"foreground": "#f2f3f8",
+					"foreground": "#19191b",
 					"background": "#d75f00",
 					"leading_diamond": "\u256d\u2500\ue0b2",
 					"template": " {{ .Icon }} ",
@@ -36,7 +36,7 @@
 					"type": "path",
 					"style": "powerline",
 					"powerline_symbol": "\ue0b0",
-					"foreground": "#f2f3f8",
+					"foreground": "#19191b",
 					"background": "#0087af",
 					"template": " {{ .Path }} ",
 					"properties": {
@@ -49,7 +49,7 @@
 				{
 					"type": "git",
 					"style": "diamond",
-					"foreground": "#f2f3f8",
+					"foreground": "#19191b",
 					"background": "#378504",
 					"background_templates": [
 						"{{ if or (.Working.Changed) (.Staging.Changed) }}#a97400{{ end }}",
@@ -59,7 +59,7 @@
 					],
 					"leading_diamond": "<transparent,background>\ue0b0</>",
 					"trailing_diamond": "\ue0b0",
-					"template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <#121318>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <#121318>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <#121318>\uf692 {{ .StashCount }}</>{{ end }} ",
+					"template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <#19191b>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <#19191b>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <#19191b>\uf692 {{ .StashCount }}</>{{ end }} ",
 					"properties": {
 						"branch_gone_icon": "\uf655",
 						"branch_icon": "\uf418 ",
@@ -81,7 +81,7 @@
 					"style": "powerline",
 					"powerline_symbol": "\ue0b2",
 					"invert_powerline": true,
-					"foreground": "#ffffff",
+					"foreground": "#19191b",
 					"background": "#00897b",
 					"background_templates": ["{{ if gt .Code 0 }}#e91e63{{ end }}"],
 					"trailing_diamond": "\uE0B4",
@@ -95,7 +95,7 @@
 					"style": "powerline",
 					"powerline_symbol": "\ue0b2",
 					"invert_powerline": true,
-					"foreground": "#585858",
+					"foreground": "#19191b",
 					"background": "#e4e4e4",
 					"template": " \uf608 {{ .FormattedMs }} ",
 					"properties": {
@@ -107,7 +107,7 @@
 					"type": "time",
 					"style": "diamond",
 					"invert_powerline": true,
-					"foreground": "#f2f3f8",
+					"foreground": "#19191b",
 					"background": "#d75f00",
 					"trailing_diamond": "\ue0b0",
 					"template": " \uf5ef {{ .CurrentDate | date .Format }} ",
