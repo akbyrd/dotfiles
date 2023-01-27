@@ -29,15 +29,16 @@ Remove-Item $terminalSettings
 New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
 
 # Development - PowerShell
+$pwshProfile = $Profile.CurrentUserAllHosts
 winget install -s winget -e Microsoft.PowerShell
-New-Item -ItemType HardLink -Force -Path $Profile -Target res/pwsh-profile.ps1
+New-Item -ItemType HardLink -Force -Path $pwshProfile -Target res/pwsh-profile.ps1
 Update-Help
 
 # Development - PowerShell Appearance
 winget install -s winget -e JanDeDobbeleer.OhMyPosh
 Install-Module posh-git
 Install-Module Terminal-Icons -Repository PSGallery
-$ompTheme = (Split-Path $Profile) + "\oh-my-posh-theme.omp.json"
+$ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
 .$Profile
 

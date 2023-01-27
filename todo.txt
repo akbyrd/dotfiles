@@ -1,5 +1,6 @@
 General
 -------
+pwsh keybinding - ctrl+l -> Clear-Host
 pwsh keybinding - open settings file
 pwsh keybinding - reload profile
 pwsh keybinding - open oh-my-posh theme
@@ -13,7 +14,7 @@ Hard linking terminal settings does not work
 	The file is replaced when saving settings
 	Devs claim smylinking should work
 	https://github.com/microsoft/terminal/issues/14730
-Experiement with powershell extension. Might need to copy profile there too
+Experiement with powershell extension
 Learn how to specify parameters to winget packages when installing
 Can we iterate available fonts with curl?
 Anything we can do about UAC prompts?
