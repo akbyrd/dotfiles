@@ -157,6 +157,7 @@
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
     "firstWindowPreference": "persistedWindowLayout",
+    "initialCols": 140,
     "profiles":
     {
         "defaults":
