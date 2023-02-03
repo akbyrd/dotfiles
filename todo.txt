@@ -1,13 +1,23 @@
 General
 -------
+pwsh - escape shouldn't get eaten to clear completion suggestions
 pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion
 Copy Argus profile
-vscode - improve search highlighting / colors
-vscode - Improve hiding the find widget in the terminal
 vscode - Make a full pass over keybindings
 vscode - Faster Up/Down
-vscode - Consider using terminal editors
+vscode - Move by word left/right
+vscode - fold except preprocessor regions
+vscode - improve search highlighting / colors
+vscode - Make current line highlight more obvious
+vscode - Pin/lock editors to prevent them being closed
+vscode - Keep cursor centered (only) when scrolling
+vscode - Fix search highlighting
+vscode - selection bindings in list views
+vscode - Jump/select by scope
+vscode - Jump/select by function
+vscode - try MultiCommand
+vscode - feature request support for maximizing terminal when justified
 vscode - Experiement with powershell extension
 oh-my-posh - What's Enable-PoshLineError?
 oh-my-posh - What's Enable-PoshTooltips?
@@ -17,6 +27,8 @@ win-term - Hard linking settings does not work
 	Devs claim smylinking should work
 	https://github.com/microsoft/terminal/issues/14730
 winget - Learn how to specify parameters to packages when installing
+win - Keybinding to move window to other desktop
+win - Replace task manager with process explorer
 
 
 
