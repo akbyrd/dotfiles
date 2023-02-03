@@ -1,5 +1,7 @@
 General
 -------
+Use Set-PSReadLineOption -Colors to theme powershell (to match vscode)
+Maybe rename repo to dotfiles
 pwsh - escape shouldn't get eaten to clear completion suggestions
 pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion

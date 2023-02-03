@@ -25,7 +25,6 @@ winget install -s winget -e WinMerge.WinMerge
 # Development - Terminal
 $terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Stop-Process -Name WindowsTerminal
-Remove-Item $terminalSettings
 New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
 
 # Development - PowerShell
