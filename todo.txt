@@ -1,5 +1,4 @@
-General
--------
+general - move registry edits to this repo
 setup - Copy Argus profile
 setup - requires pwsh 7.3.2
 setup - needs to bootstrap
@@ -29,6 +28,8 @@ vscode - try MultiCommand
 vscode - feature request support for maximizing terminal when justified
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
+vscode - build Unreal from terminal (and use problems)
+vscode - seed find with vertical selection
 oh-my-posh - What's Enable-PoshLineError?
 oh-my-posh - What's Enable-PoshTooltips?
 oh-my-posh - What's Enable-PoshTransientPrompt?

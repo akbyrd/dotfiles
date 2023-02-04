@@ -23,11 +23,11 @@ Function Exit-Shell { Exit }
 
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -CompletionQueryItems 1e6
+
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ForwardWord
 Set-PSReadLineKeyHandler -Chord "Ctrl+w" -ScriptBlock { Inject-Command("exit") }
 Set-PSReadLineKeyHandler -Chord "Escape" -ScriptBlock { Revert-LineAndPrediction }
-
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -ScriptBlock { Inject-Command("Edit-Profile") }
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+>" -ScriptBlock { Inject-Command("Reload-Profile") }
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -ScriptBlock { Inject-Command("Edit-Theme") }

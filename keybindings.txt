@@ -1,0 +1,92 @@
+Arrows
+-   | Move Cursor Single      | Select Cursor Single     |
+c   | Move Cursor Word        | Select Cursor Word       |
+a   | Move Cursor Blank Line  | Select Cursor Blank Line |
+ca  | Move Cursor Half Page   | Select Cursor Half Page  | Try Move Cursor Symbol
+
+Page Up / Down / Home / End
+-   | Move Cursor Page        | Select Cursor Page       |
+c   | Focus Tab Adjacent      | Focus Tab Group          |
+a   | Move Tab Adjacent       | Move Tab To Group        |
+ca  | Move Lines              | Move Tab Group           |
+
+Enter
+-   |                         |                          |
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+Backspace
+-   |                         |                          |
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+Delete
+-   |                         |                          |
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+Tab
+-   |                         |                          |
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+-=
+c   | Cursor Location History | Cusor Edit History       |
+a   |                         |                          |
+ca  |                         |                          |
+
+[]
+c   | Fold Scope Recursive    | Fold Scope               |
+a   | Move by AST             | Select by AST            |
+ca  | Move Cursor Bracket     | Select Cursor Bracket    |
+
+\
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+;'
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+,.
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+/
+c   |                         |                          |
+a   |                         |                          |
+ca  |                         |                          |
+
+Other
+cs y
+cs u
+cs i
+cs o
+cs p
+
+
+
+Remaining Operations
+--------------------
+Pin Editor
+Comment Lines
+
+
+
+Potential New Stuff
+-------------------
+https://code.visualstudio.com/docs/getstarted/keybindings
+editor.action.wordHighlight.trigger
+Separate go to definition and go to declaration
+advanced new file
+editor.action.smartSelect.expand / shrink
+Wrap selection
+Move Cursor Symbol | Select Cursor Symbol
+Move Cursor Chunk | Select Cursor Chunk
