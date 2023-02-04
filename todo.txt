@@ -9,6 +9,9 @@ Copy Argus profile
 vscode - Make a full pass over keybindings
 vscode - Faster Up/Down
 vscode - Move by word left/right
+vscode - Move by symbol up/down
+vscode - Jump/select by scope
+vscode - Jump/select by function
 vscode - fold except preprocessor regions
 vscode - improve search highlighting / colors
 vscode - Make current line highlight more obvious
@@ -16,8 +19,6 @@ vscode - Pin/lock editors to prevent them being closed
 vscode - Keep cursor centered (only) when scrolling
 vscode - Fix search highlighting
 vscode - selection bindings in list views
-vscode - Jump/select by scope
-vscode - Jump/select by function
 vscode - try MultiCommand
 vscode - feature request support for maximizing terminal when justified
 vscode - Experiement with powershell extension
