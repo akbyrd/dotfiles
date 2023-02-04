@@ -1,0 +1,16 @@
+PSReadline
+----------
+Ctrl+[ cannot be bound in pwsh (works in powershell)
+Cannot bind the same key with various modifiers
+
+
+
+vscode
+------
+Doesn't support ctrl+[;',.
+https://github.com/microsoft/vscode/issues/172709
+https://github.com/xtermjs/xterm.js/issues/2357
+
+Text reflow is trash
+https://github.com/microsoft/vscode/issues/172281
+https://github.com/xtermjs/xterm.js/issues/4231

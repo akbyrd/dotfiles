@@ -2,16 +2,18 @@ $pwshProfile = $Profile.CurrentUserAllHosts
 $ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 
 oh-my-posh init pwsh --config $ompTheme | Invoke-Expression
-
 Import-Module posh-git
-$env:POSH_GIT_ENABLED = $true
-
 Import-Module Terminal-Icons
 
 Function Inject-Command([String] $command) {
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
 	[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+}
+
+Function Revert-LineAndPrediction {
+	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 }
 
 Function Edit-Profile { code $pwshProfile }
@@ -23,9 +25,12 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -CompletionQueryItems 1e6
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ForwardWord
-Set-PSReadLineKeyHandler -Chord "Shift+<" -ScriptBlock { Inject-Command("Edit-Profile") }
-Set-PSReadLineKeyHandler -Chord "Shift+>" -ScriptBlock { Inject-Command("Reload-Profile") }
-Set-PSReadLineKeyHandler -Chord "Shift+?" -ScriptBlock { Inject-Command("Edit-Theme") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+w" -ScriptBlock { Inject-Command("exit") }
+Set-PSReadLineKeyHandler -Chord "Escape" -ScriptBlock { Revert-LineAndPrediction }
+
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -ScriptBlock { Inject-Command("Edit-Profile") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+>" -ScriptBlock { Inject-Command("Reload-Profile") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -ScriptBlock { Inject-Command("Edit-Theme") }
 
 # Tab auto-completion for winget
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {

@@ -9,7 +9,7 @@ winget install -s winget -e 7zip.7zip
 winget install -s winget -e Argotronic.ArgusMonitor
 winget install -s winget -e Discord.Discord
 winget install -s winget -e Mozilla.Firefox
-winget install -s winget -e SlackTechnologies.Slack
+#winget install -s winget -e SlackTechnologies.Slack
 winget install -s winget -e Spotify.Spotify
 winget install -s winget -e Valve.Steam
 winget install -s winget -e VideoLAN.VLC
@@ -19,13 +19,14 @@ winget install -s winget -e Microsoft.VisualStudio.2022.Community
 winget install -s winget -e Microsoft.VisualStudioCode
 winget install -s winget -e Microsoft.Windows.Terminal
 winget install -s winget -e TortoiseGit.TortoiseGit
-winget install -s winget -e TortoiseSVN.TortoiseSVN
+#winget install -s winget -e TortoiseSVN.TortoiseSVN
 winget install -s winget -e WinMerge.WinMerge
 
 # Development - Terminal
 $terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Stop-Process -Name WindowsTerminal
-New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
+#New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
+Copy-Item -Force -Path $terminalSettings -Destination res/windows-terminal-settings.json
 
 # Development - PowerShell
 $pwshProfile = $Profile.CurrentUserAllHosts
@@ -39,7 +40,7 @@ Install-Module posh-git
 Install-Module Terminal-Icons -Repository PSGallery
 $ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
-.$Profile
+.$pwshProfile
 
 Install-Module PSWinGlue
 Import-Module PSWinGlue

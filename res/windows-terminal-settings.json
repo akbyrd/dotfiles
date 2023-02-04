@@ -86,6 +86,14 @@
             "keys": "alt+up"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+shift+comma"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+alt+comma"
+        },
+        {
             "command": "openNewTabDropdown",
             "keys": "ctrl+p"
         },
@@ -95,7 +103,7 @@
                 "action": "openSettings",
                 "target": "defaultsFile"
             },
-            "keys": "ctrl+shift+comma"
+            "keys": "ctrl+period"
         },
         {
             "command":
@@ -103,7 +111,7 @@
                 "action": "openSettings",
                 "target": "settingsUI"
             },
-            "keys": "ctrl+alt+comma"
+            "keys": "ctrl+/"
         },
         {
             "command":

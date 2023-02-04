@@ -1,11 +1,17 @@
 General
 -------
-Use Set-PSReadLineOption -Colors to theme powershell (to match vscode)
-Maybe rename repo to dotfiles
-pwsh - escape shouldn't get eaten to clear completion suggestions
+setup - Copy Argus profile
+setup - requires pwsh 7.3.2
+setup - needs to bootstrap
+	install pwsh, then run the rest of setup there
+	drop admin access asap
+pwsh - shift+up/dn select line
+pwsh - Use Set-PSReadLineOption -Colors to theme powershell (to match vscode)
+pwsh - Set font in profile?
 pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion
-Copy Argus profile
+pswh - Search for public dotfiles on github
+	https://github.com/SeeminglyScience/dotfiles
 vscode - Make a full pass over keybindings
 vscode - Faster Up/Down
 vscode - Move by word left/right
@@ -21,7 +27,8 @@ vscode - Fix search highlighting
 vscode - selection bindings in list views
 vscode - try MultiCommand
 vscode - feature request support for maximizing terminal when justified
-vscode - Experiement with powershell extension
+vscode - Experiment with search editors
+vscode - Experiment with powershell extension
 oh-my-posh - What's Enable-PoshLineError?
 oh-my-posh - What's Enable-PoshTooltips?
 oh-my-posh - What's Enable-PoshTransientPrompt?

@@ -1,0 +1,10 @@
+pwsh
+----
+Only works with monospace ttf fonts
+	User installed is fine
+
+
+
+pwsh - Useful Commands
+----------------------
+$Profile | Select-Object *
