@@ -11,6 +11,7 @@ pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
+vscode - terminal find is backwards
 vscode - Make a full pass over keybindings
 vscode - Faster Up/Down
 vscode - Move by word left/right
