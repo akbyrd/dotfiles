@@ -11,31 +11,31 @@ a   | Move Tab Adjacent       | Move Tab To Group        |
 ca  | Move Lines              | Move Tab Group           |
 
 Enter
--   |                         |                          |
-c   |                         |                          |
+-   | Insert Line             |                          |
+c   | Insert Line After       | Insert Line Before       |
 a   |                         |                          |
 ca  |                         |                          |
 
 Backspace
--   |                         |                          |
-c   |                         |                          |
+-   | Delete Char Left        |                          |
+c   | Delete Word Left        |                          |
 a   |                         |                          |
 ca  |                         |                          |
 
 Delete
--   |                         |                          |
-c   |                         |                          |
+-   | Delete Char Right       |                          |
+c   | Delete Word Right       |                          |
 a   |                         |                          |
-ca  |                         |                          |
+ca  | OS                      |                          |
 
-Tab
--   |                         |                          |
+	Tab
+-   | Insert Tab              | Unindent Line            |
 c   |                         |                          |
-a   |                         |                          |
-ca  |                         |                          |
+a   | OS                      | OS                       |
+ca  | OS                      | OS                       |
 
 -=
-c   | Cursor Location History | Cusor Edit History       |
+c   | Cursor Location History | Cursor Edit History      |
 a   |                         |                          |
 ca  |                         |                          |
 
@@ -77,6 +77,7 @@ Remaining Operations
 --------------------
 Pin Editor
 Comment Lines
+Delete Line
 
 
 
