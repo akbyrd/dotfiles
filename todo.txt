@@ -11,17 +11,18 @@ pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
-vscode - terminal find is backwards
+	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
 vscode - Make a full pass over keybindings
 vscode - Faster Up/Down
 vscode - Move by word left/right
 vscode - Move by symbol up/down
 vscode - Jump/select by scope
 vscode - Jump/select by function
+vscode - Pin/lock editors to prevent them being closed
+vscode - terminal find is backwards
 vscode - fold except preprocessor regions
 vscode - improve search highlighting / colors
 vscode - Make current line highlight more obvious
-vscode - Pin/lock editors to prevent them being closed
 vscode - Keep cursor centered (only) when scrolling
 vscode - Fix search highlighting
 vscode - selection bindings in list views
@@ -31,9 +32,6 @@ vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - build Unreal from terminal (and use problems)
 vscode - seed find with vertical selection
-oh-my-posh - What's Enable-PoshLineError?
-oh-my-posh - What's Enable-PoshTooltips?
-oh-my-posh - What's Enable-PoshTransientPrompt?
 win-term - Hard linking settings does not work
 	The file is replaced when saving settings
 	Devs claim smylinking should work

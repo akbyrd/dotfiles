@@ -450,5 +450,7 @@
     "showTabsInTitlebar": true,
     "startOnUserLogin": true,
     "tabSwitcherMode": "disabled",
-    "useAcrylicInTabRow": true
+    "useAcrylicInTabRow": true,
+    "multiLinePasteWarning": false,
+    "confirmCloseAllTabs": false
 }

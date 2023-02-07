@@ -1,11 +1,12 @@
 $pwshProfile = $Profile.CurrentUserAllHosts
 $ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 
-oh-my-posh init pwsh --config $ompTheme | Invoke-Expression
-Import-Module posh-git
-Import-Module Terminal-Icons
+((& oh-my-posh init pwsh --config $ompTheme --print) -join "`n") | Invoke-Expression
+$env:POSH_GIT_ENABLED = $true
+#Import-Module Terminal-Icons
 
 Function Inject-Command([String] $command) {
+	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
 	[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
@@ -32,6 +33,10 @@ Set-PSReadLineKeyHandler -Chord "Escape" -ScriptBlock { Revert-LineAndPrediction
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -ScriptBlock { Inject-Command("Edit-Profile") }
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+>" -ScriptBlock { Inject-Command("Reload-Profile") }
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -ScriptBlock { Inject-Command("Edit-Theme") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+LeftArrow" -Function ShellBackwardWord
+Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ShellForwardWord
+Set-PSReadLineKeyHandler -Chord "Shift+Ctrl+LeftArrow" -Function SelectShellBackwardWord
+Set-PSReadLineKeyHandler -Chord "Shift+Ctrl+RightArrow" -Function SelectShellForwardWord
 
 # Tab auto-completion for winget
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
