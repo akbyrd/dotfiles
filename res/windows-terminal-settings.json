@@ -1,21 +1,21 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
             "command": "find",
             "keys": "ctrl+shift+f"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "prevTab"
             },
             "keys": "alt+left"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "copy",
                 "singleLine": false
@@ -23,43 +23,25 @@
             "keys": "ctrl+c"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "openSettings",
                 "target": "settingsFile"
             },
-            "keys": "ctrl+comma"
+            "keys": "ctrl+alt+["
         },
         {
             "command": "paste",
             "keys": "ctrl+v"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command":
-            {
-                "action": "quakeMode"
-            },
-            "keys": "ctrl+shift+c"
-        },
-        {
-            "command":
-            {
-                "action": "newTab"
-            },
-            "keys": "ctrl+n"
-        },
-        {
-            "command": "closePane",
-            "keys": "ctrl+w"
         },
         {
             "command": "unbound",
@@ -94,27 +76,57 @@
             "keys": "ctrl+alt+comma"
         },
         {
-            "command": "openNewTabDropdown",
-            "keys": "ctrl+p"
+            "command": "unbound",
+            "keys": "ctrl+period"
         },
         {
-            "command":
+            "command": "unbound",
+            "keys": "ctrl+comma"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+/"
+        },
+        {
+            "command": 
+            {
+                "action": "newTab"
+            },
+            "keys": "ctrl+n"
+        },
+        {
+            "command": 
+            {
+                "action": "quakeMode"
+            },
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "command": 
             {
                 "action": "openSettings",
                 "target": "defaultsFile"
             },
-            "keys": "ctrl+period"
+            "keys": "ctrl+alt+]"
         },
         {
-            "command":
+            "command": "closePane",
+            "keys": "ctrl+w"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+p"
+        },
+        {
+            "command": 
             {
                 "action": "openSettings",
                 "target": "settingsUI"
             },
-            "keys": "ctrl+/"
+            "keys": "ctrl+alt+\\"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "nextTab"
             },
@@ -125,7 +137,7 @@
             "keys": "ctrl+shift+w"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "down"
@@ -133,7 +145,7 @@
             "keys": "ctrl+alt+down"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -141,7 +153,7 @@
             "keys": "ctrl+alt+up"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -149,7 +161,7 @@
             "keys": "ctrl+alt+left"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -158,28 +170,31 @@
         }
     ],
     "alwaysShowTabs": false,
+    "confirmCloseAllTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "disableAnimations": false,
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-    "firstWindowPreference": "persistedWindowLayout",
+    "firstWindowPreference": "defaultProfile",
     "initialCols": 140,
-    "profiles":
+    "launchMode": "default",
+    "multiLinePasteWarning": false,
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
             "colorScheme": "Campbell",
-            "font":
+            "font": 
             {
                 "face": "Inconsolata NF",
-                "size": 10
+                "size": 10.0
             },
             "opacity": 80,
             "useAcrylic": false
         },
-        "list":
+        "list": 
         [
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -214,7 +229,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
@@ -450,7 +465,7 @@
     "showTabsInTitlebar": true,
     "startOnUserLogin": true,
     "tabSwitcherMode": "disabled",
+    "themes": [],
     "useAcrylicInTabRow": true,
-    "multiLinePasteWarning": false,
-    "confirmCloseAllTabs": false
+    "windowingBehavior": "useAnyExisting"
 }

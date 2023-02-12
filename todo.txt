@@ -5,40 +5,54 @@ setup - needs to bootstrap
 	install pwsh, then run the rest of setup there
 	drop admin access asap
 pwsh - shift+up/dn select line
-pwsh - Use Set-PSReadLineOption -Colors to theme powershell (to match vscode)
+pwsh - Set-PSReadLineOption -Colors to match vscode
 pwsh - Set font in profile?
 pwsh - Extract vars to a separate script?
 pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
-vscode - Make a full pass over keybindings
-vscode - Faster Up/Down
-vscode - Move by word left/right
-vscode - Move by symbol up/down
-vscode - Jump/select by scope
-vscode - Jump/select by function
-vscode - Pin/lock editors to prevent them being closed
-vscode - terminal find is backwards
-vscode - fold except preprocessor regions
-vscode - improve search highlighting / colors
-vscode - Make current line highlight more obvious
+vscode - paste doesn't work in command responses in terminal
+vscode - fix ctrl+left in global find
+vscode - ctrl+alt+pageup/down for lists and terminal
+vscode - down focus first result in global search (ctrl+down still jumps to last selection)
+vscode - opening local find doesn't highlight the current result
 vscode - Keep cursor centered (only) when scrolling
-vscode - Fix search highlighting
-vscode - selection bindings in list views
-vscode - try MultiCommand
-vscode - feature request support for maximizing terminal when justified
+vscode - terminal find is backwards
+vscode - Test centered layout changes
+vscode - Try macros extension instead of multi-command
+	sendSequence
+	sequential vs parallel
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
-vscode - build Unreal from terminal (and use problems)
-vscode - seed find with vertical selection
+vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
+vscode - BUG: Escape double handled in file explorer
+vscode - BUG: Settings file comments erased at beginning
+vscode - BUG: Keybindings file last binding reformatted
+vscode - BUG: Horizontal scroll
+vscode - BUG: List can't tell if single selection
+vscode - BUG: List can't tell if focus is selected
+vscode - BUG: List expand selection is _super_ weird
 win-term - Hard linking settings does not work
 	The file is replaced when saving settings
-	Devs claim smylinking should work
+	Devs claim symlinking should work
 	https://github.com/microsoft/terminal/issues/14730
 winget - Learn how to specify parameters to packages when installing
 win - Keybinding to move window to other desktop
 win - Replace task manager with process explorer
+
+
+
+VS Code Extension
+-----------------
+Command - Scroll to Current Line
+Command - Move Cursor & Scroll to Current Line
+Command - Move/Select Cursor Scope
+Command - Move/Select Cursor Function
+Command - Move/Select Cursor Symbol
+Command - Delete Line Up
+Command - Faster Arrow Keys
+Command - Fold Except Preprocessor
 
 
 

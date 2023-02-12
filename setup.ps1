@@ -9,6 +9,7 @@ winget install -s winget -e 7zip.7zip
 winget install -s winget -e Argotronic.ArgusMonitor
 winget install -s winget -e Discord.Discord
 winget install -s winget -e Mozilla.Firefox
+winget install -s winget -e NickeManarin.ScreenToGif
 #winget install -s winget -e SlackTechnologies.Slack
 winget install -s winget -e Spotify.Spotify
 winget install -s winget -e Valve.Steam

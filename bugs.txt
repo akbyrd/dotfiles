@@ -11,6 +11,6 @@ Doesn't support ctrl+[;',.
 https://github.com/microsoft/vscode/issues/172709
 https://github.com/xtermjs/xterm.js/issues/2357
 
-Text reflow is trash
+Terminal text reflow is trash
 https://github.com/microsoft/vscode/issues/172281
 https://github.com/xtermjs/xterm.js/issues/4231
