@@ -7,10 +7,122 @@ Cannot bind the same key with various modifiers
 
 vscode
 ------
-Doesn't support ctrl+[;',.
+dupe
+Terminal text does not reflow if it's not visible when resizing the window
+https://github.com/microsoft/vscode/issues/172281
+https://github.com/xtermjs/xterm.js/issues/4231
+
+dupe
+vscode will not allow terminal to handle Ctrl+.
 https://github.com/microsoft/vscode/issues/172709
 https://github.com/xtermjs/xterm.js/issues/2357
 
-Terminal text reflow is trash
-https://github.com/microsoft/vscode/issues/172281
-https://github.com/xtermjs/xterm.js/issues/4231
+open
+Terminals moved from an editor to the panel don't update "terminalEditorFocus
+https://github.com/microsoft/vscode/issues/173240
+
+open
+Configurable key repeat rate
+https://github.com/microsoft/vscode/issues/173440
+
+not a bug
+Keyboard Shortcut Troubleshooting sometimes reports the wrong binding
+https://github.com/microsoft/vscode/issues/174116
+
+won't fix
+Keybinding processing doesn't stop after user keybinding
+https://github.com/microsoft/vscode/issues/174117
+
+open
+Default terminal keybindings don't handle differences between terminal editors and the panel terminal well
+https://github.com/microsoft/vscode/issues/174119
+
+won't fix
+No commands appear to exist to focus a terminal editor
+https://github.com/microsoft/vscode/issues/174122
+
+dupe?
+Can't copy or edit built-in keybindings with arguments
+https://github.com/microsoft/vscode/issues/174125
+
+won't fix
+Support for maximizing panel when alignment is set to "Justify"
+https://github.com/microsoft/vscode/issues/174160
+
+open
+Terminal editors don't set activeEditorIsPinned and other context values
+https://github.com/microsoft/vscode/issues/174161
+
+open
+Don't pin editors when using workbench.action.moveEditorLeftInGroup
+https://github.com/microsoft/vscode/issues/174162
+
+fixed
+activeEditorIsPinned is not set when editor is auto-pinned by workbench.action.moveEditorLeftInGroup
+https://github.com/microsoft/vscode/issues/174163
+
+dupe
+https://github.com/microsoft/vscode/issues/174168
+https://github.com/microsoft/vscode/issues/106209
+
+open
+editor.rangeHighlightBackground appears then disappears when stepping through search results
+https://github.com/microsoft/vscode/issues/174768
+
+open
+Add missing commands for list expansion
+https://github.com/microsoft/vscode/issues/174770
+
+dupe
+terminal.integrated.smoothScrolling doesn't work with most commands
+https://github.com/microsoft/vscode/issues/174772
+https://github.com/microsoft/vscode/issues/158923
+https://github.com/xtermjs/xterm.js/issues/4121
+
+open
+Can't keybind escape when renaming a file in explorer view
+https://github.com/microsoft/vscode/issues/174877
+
+
+
+vscode omnisharp
+----------------
+open
+Many issues with token classification for syntactic and semantic highlighting
+https://github.com/OmniSharp/omnisharp-vscode/issues/5587
+
+
+
+vscode cpptools
+---------------
+open
+Inaccurate textmate scope for the throw specifier on a function
+https://github.com/microsoft/vscode-cpptools/issues/10544
+
+open
+Cannot distinguish textmate scopes for built-in vs overloaded new and delete operators
+https://github.com/microsoft/vscode-cpptools/issues/10545
+
+open
+No semantic token information for alignas keyword
+https://github.com/microsoft/vscode-cpptools/issues/10546
+
+open
+No semantic token information for macro parameters
+https://github.com/microsoft/vscode-cpptools/issues/10547
+
+open
+Semantic tokens for user defined literals lose information compared to plain textmate syntax tokens
+https://github.com/microsoft/vscode-cpptools/issues/10548
+
+open
+Semantic tokens for overloaded operators lose information compared to plain textmate syntax tokens
+https://github.com/microsoft/vscode-cpptools/issues/10549
+
+open
+Emit semantic tokens for user defined conversions
+https://github.com/microsoft/vscode-cpptools/issues/10550
+
+open
+Incorrect symbols provided in some cases
+https://github.com/microsoft/vscode-cpptools/issues/10551

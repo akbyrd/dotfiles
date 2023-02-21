@@ -24,6 +24,9 @@ vscode - Find an extension for bookmarks
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
+vscode - build Unreal from terminal (and use problems)
+vscode - make tasks use pwsh (I think they're using cmd atm)
+vscode - seed find with vertical selection
 vscode - QUESTION: textEditor.selection can be out of date. Is it possible to ensure it's up to date inside a command?
 vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
 vscode - BUG: Escape double handled in file explorer
