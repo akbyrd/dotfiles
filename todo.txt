@@ -12,10 +12,8 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
-vscode - xml colors are wrong
-vscode - json colors are wrong
 vscode - ctrl+k ctrl+0 doesn't work
-vscode - create theme test file for Lua
+vscode - create theme test file for lua
 vscode - print a keybindings cheatsheet
 vscode - fix keybindings when debugging
 vscode - paste doesn't work in command responses in terminal
