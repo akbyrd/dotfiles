@@ -12,6 +12,9 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
+vscode - xml colors are wrong
+vscode - json colors are wrong
+vscode - ctrl+k ctrl+0 doesn't work
 vscode - paste doesn't work in command responses in terminal
 vscode - Show friendly name for commands in keybindings GUI
 vscode - fix keybindings when debugging
