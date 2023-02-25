@@ -12,7 +12,9 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
-vscode - ctrl+k ctrl+0 doesn't work
+vscode - ctrl+shift+del doesn't work from second to last line in file if it's empty
+vscode - ctrl+shift+left doesn't work in search input
+vscode - pageup/down in find causes editor to scroll
 vscode - create theme test file for lua
 vscode - print a keybindings cheatsheet
 vscode - fix keybindings when debugging
