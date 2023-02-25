@@ -192,6 +192,7 @@
                 "size": 10.0
             },
             "opacity": 80,
+            "startingDirectory": ".",
             "useAcrylic": false
         },
         "list": 
@@ -463,7 +464,7 @@
         }
     ],
     "showTabsInTitlebar": true,
-    "startOnUserLogin": true,
+    "startOnUserLogin": false,
     "tabSwitcherMode": "disabled",
     "themes": [],
     "useAcrylicInTabRow": true,

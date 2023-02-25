@@ -15,7 +15,7 @@ pswh - Search for public dotfiles on github
 vscode - ctrl+shift+del doesn't work from second to last line in file if it's empty
 vscode - ctrl+shift+left doesn't work in search input
 vscode - pageup/down in find causes editor to scroll
-vscode - create theme test file for lua
+vscode - create theme test file for lua, c++/cli
 vscode - print a keybindings cheatsheet
 vscode - fix keybindings when debugging
 vscode - paste doesn't work in command responses in terminal

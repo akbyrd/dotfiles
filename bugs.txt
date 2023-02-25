@@ -41,9 +41,10 @@ won't fix
 No commands appear to exist to focus a terminal editor
 https://github.com/microsoft/vscode/issues/174122
 
-dupe?
+open
 Can't copy or edit built-in keybindings with arguments
 https://github.com/microsoft/vscode/issues/174125
+https://github.com/microsoft/vscode/issues/84072
 
 won't fix
 Support for maximizing panel when alignment is set to "Justify"
@@ -98,6 +99,7 @@ vscode cpptools
 open
 Inaccurate textmate scope for the throw specifier on a function
 https://github.com/microsoft/vscode-cpptools/issues/10544
+https://github.com/jeff-hykin/better-cpp-syntax/issues/625
 
 open
 Cannot distinguish textmate scopes for built-in vs overloaded new and delete operators
@@ -106,23 +108,26 @@ https://github.com/microsoft/vscode-cpptools/issues/10545
 open
 No semantic token information for alignas keyword
 https://github.com/microsoft/vscode-cpptools/issues/10546
+https://github.com/jeff-hykin/better-cpp-syntax/issues/626
 
 open
 No semantic token information for macro parameters
 https://github.com/microsoft/vscode-cpptools/issues/10547
+https://github.com/jeff-hykin/better-cpp-syntax/issues/627
 
-open
+won't fix
 Semantic tokens for user defined literals lose information compared to plain textmate syntax tokens
 https://github.com/microsoft/vscode-cpptools/issues/10548
 
-open
+won't fix
 Semantic tokens for overloaded operators lose information compared to plain textmate syntax tokens
 https://github.com/microsoft/vscode-cpptools/issues/10549
 
 open
 Emit semantic tokens for user defined conversions
 https://github.com/microsoft/vscode-cpptools/issues/10550
+https://developercommunity.visualstudio.com/t/Allow-user-defined-conversion-operators/10288979
 
-open
+won't fix
 Incorrect symbols provided in some cases
 https://github.com/microsoft/vscode-cpptools/issues/10551
