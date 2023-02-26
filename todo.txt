@@ -3,8 +3,8 @@ setup - Copy Argus profile
 setup - bootstrap - install pwsh, then run the rest of setup there
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd
+psreadline - BUG: SelectLine/SelectBackwardsLine
 psreadline - Missing SelectNextWordEnd
-pwsh - shift+up/dn select line
 pwsh - update tab bindings
 pwsh - Set-PSReadLineOption -Colors to match vscode
 pwsh - Set font in profile?
@@ -13,13 +13,10 @@ pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
 unreal - build from terminal (and use problems)
-vscode - print a keybindings cheatsheet
 vscode - ctrl+shift+del doesn't work from second to last line in file if it's empty
 vscode - move line doesn't work with vertical selection
-vsocde - editor.action.focusNextCursor, editor.action.focusPreviousCursor
 vscode - create theme test file for lua, c++/cli, powershell
 vscode - fix keybindings when debugging
-vscode - paste doesn't work in command responses in terminal
 vscode - Show friendly name for commands in keybindings GUI
 vscode - Keep cursor centered (only) when scrolling
 vscode - Try macros extension instead of multi-command

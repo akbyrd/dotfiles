@@ -31,8 +31,7 @@
             "keys": "ctrl+alt+comma"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "paste"
         },
         {
             "command": 
@@ -94,6 +93,10 @@
         {
             "command": "unbound",
             "keys": "ctrl+alt+\\"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -201,7 +204,8 @@
             },
             "opacity": 80,
             "startingDirectory": ".",
-            "useAcrylic": false
+            "useAcrylic": false,
+            "useAtlasEngine": true
         },
         "list": 
         [
