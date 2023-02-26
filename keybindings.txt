@@ -1,56 +1,9 @@
-Current
--------
-
-                 | -                  | s                    | c                   | cs                    | a                      | sa                       | ca                    | csa                     |
-Arrows           | Move Cursor Single | Select Cursor Single | Move Cursor Word    | Select Cursor Word    | Move Cursor Blank Line | Select Cursor Blank Line | Move Cursor Half Page | Select Cursor Half Page |
-PgUp/Dn/Home/End | Move Cursor Page   | Select Cursor Page   | Focus Tab Adjacent  | Focus Tab Group       | Move Tab Adjacent      | Move Tab To Group        | Move Lines            | Move Tab Group          |
-Enter            | Insert Line        |                      | Insert Line After   | Insert Line Before    |                        |                          |                       |                         |
-Backspace        | Delete Char Left   |                      | Delete Word Left    |                       |                        |                          |                       |                         |
-Delete           | Delete Char Right  |                      | Delete Word Right   |                       |                        |                          | Ext - OS              |                         |
-Tab              | .                  | Unindent Line        |                     |                       | Ext - OS               | Ext - OS                 | Ext - OS              | Ext - OS                |
--=               | .                  | .                    | Cursor Loc History  | Cursor Edit History   |                        |                          |                       |                         |
-[]               | .                  | .                    | Fold Scope Recurse  | Fold Scope Single     | Move by AST            | Select by AST            | Move Cursor Bracket   | Select Cursor Bracket   |
-\                | .                  | .                    | Split Editor        | Open Terminal         |                        |                          |                       |                         |
-;'               | .                  | .                    | Edit Keybindings    |                       |                        |                          |                       |                         |
-,./              | .                  | .                    | Edit Settings       |                       |                        |                          |                       |                         |
-q                | .                  | .                    |                     | Go to Symbol Editor   | Reflow Comment         |                          |                       |                         |
-w                | .                  | .                    | Close Editor        | Close Window          | Find - Whole World     |                          |                       |                         |
-e                | .                  | .                    |                     | Toggle Explorer       | Mnemonic               |                          |                       |                         |
-r                | .                  | .                    | Recent Folders      | Focus Editor          | Find - Regex           |                          | Ext - Nvidia          |                         |
-t                | .                  | .                    | Go to Symbol Folder | Reopen Editor         | Mnemonic               |                          |                       |                         |
-y                | .                  | .                    | Redo                | Toggle Problem        |                        |                          |                       |                         |
-u                | .                  | .                    |                     | Toggle Output         |                        |                          |                       |                         |
-i                | .                  | .                    |                     | Toggle Debug Console  |                        |                          |                       |                         |
-o                | .                  | .                    | Open                | Toggle Terminal       | Toggle H/Src           |                          |                       |                         |
-p                | .                  | .                    | Go to File          | Command Palette       |                        |                          |                       |                         |
-a                | .                  | .                    | Select All          |                       |                        |                          |                       |                         |
-s                | .                  | .                    | Save                | Save As               | Mnemonic               |                          |                       |                         |
-d                | .                  | .                    | Select Next Match   | Toggle Debug          |                        |                          |                       |                         |
-f                | .                  | .                    | Find                | Toggle Find           | Mnemonic               |                          | Reveal Active File    |                         |
-g                | .                  | .                    | Go to Line          | Toggle Source Control | Mnemonic               |                          |                       |                         |
-h                | .                  | .                    | Replace             | Toggle Replace        | Mnemonic               |                          |                       |                         |
-j                | .                  | .                    | Toggle Terminal     | Maximize Terminal     |                        |                          |                       |                         |
-k                | .                  | .                    |                     | Delete Line           |                        |                          |                       |                         |
-l                | .                  | .                    | Delete Line         | Find - Select Matches |                        |                          |                       |                         |
-z                | .                  | .                    | Undo                |                       | Toggle Word Wrap       |                          |                       |                         |
-x                | .                  | .                    | Cut                 | Toggle Extensions     |                        |                          |                       |                         |
-c                | .                  | .                    | Copy                | OS                    | Find - Case            |                          |                       |                         |
-v                | .                  | .                    | Paste               | Paste                 | Mnemonic               |                          |                       |                         |
-b                | .                  | .                    | Toggle Side Bar     | Build                 |                        |                          | Rebuild               |                         |
-n                | .                  | .                    | New File            | New Window            |                        |                          | New Editor            |                         |
-m                | .                  | .                    |                     | Maximize Editor       |                        |                          |                       |                         |
-
-
-
-Proposed
---------
-
                  | | -                  | | s                    | | c        (navigate) | | cs             (open) | | a             (modify) | | sa                       | | ca            (build) | | csa                     |
 -----------------|-|--------------------|-|----------------------|-|---------------------|-|-----------------------|-|------------------------|-|--------------------------|-|-----------------------|-|-------------------------|
 Left/Right       |+| Move Cursor Char   |+| Select Cursor Char   |+| Move Cursor Word    |+| Select Cursor Word    |+| Move Cursor Subword    |+| Select Cursor Subword    | |                       | |                         |
 Up/Down          |+| Move Cursor Line   |+| Select Cursor Line   |+| Move Cursor Chunk   |+| Select Cursor Chunk   |+| Select Vertical        |+| Select Vertical          |+| Move Cursor Symbol    |+| Select Cursor Symbol    |
 PgUp/Dn          |+| Move Cursor Page   |+| Select Cursor Page   |+| Focus Tab Adjacent  |+| Focus Tab Group       |+| Move Tab Adjacent      |+| Move Tab To Group        |+| Scroll Chunk          |+| Move Tab Group          |
-Home/End         |+| Move Cursor Line   |+| Select Cursor Line   |+| Move Cursor File    |+| Focus Tab Group       |+| Move Lines             |+| Move Tab To Group        |+| Select AST            |+| Move Tab Group          |
+Home/End         |+| Move Cursor Line   |+| Select Cursor Line   |+| Move Cursor File    |+| Select Cursor File    |+| Move Lines             | |                          |+| Select AST            | |                         |
 Enter            |+| Insert Line        | |                      |+| Insert Line After   |+| Insert Line Before    |+| Find - Select Matches  | |                          | |                       | |                         |
 Backspace        |+| Delete Char Left   | |                      |+| Delete Word Left    | | Delete Line Up        |+| Delete Subword Left    |+| Delete Chunk Up          | |                       |+| Delete Symbol Up        |
 Delete           |+| Delete Char Right  | |                      |+| Delete Word Right   |+| Delete Line Down      |+| Delete Subword Right   |+| Delete Chunk Down        |+| Ext - OS              |+| Delete Symbol Down      |

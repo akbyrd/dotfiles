@@ -13,7 +13,6 @@ pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
 unreal - build from terminal (and use problems)
-vscode - ctrl+shift+home/end decide what to do
 vscode - print a keybindings cheatsheet
 vscode - ctrl+shift+del doesn't work from second to last line in file if it's empty
 vscode - move line doesn't work with vertical selection
