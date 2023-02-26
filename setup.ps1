@@ -1,8 +1,16 @@
 # Requirements
 # * Must be run on the same drive as Windows to create hard links
 # * Must be run as admin to symlink terminal settings
+# * Must be run as admin to install gpedit
+# * Must be run as admin to set file associations in HKCR
 
 #Requires -RunAsAdministrator
+
+# No Packages (23-01-23)
+# MSI Afterburner
+# Nvidia Drivers
+# Paint.NET
+# Razer Synapse
 
 # Standard
 winget install -s winget -e 7zip.7zip
@@ -10,7 +18,7 @@ winget install -s winget -e Argotronic.ArgusMonitor
 winget install -s winget -e Discord.Discord
 winget install -s winget -e Mozilla.Firefox
 winget install -s winget -e NickeManarin.ScreenToGif
-#winget install -s winget -e SlackTechnologies.Slack
+winget install -s winget -e NirSoft.NirCmd
 winget install -s winget -e Spotify.Spotify
 winget install -s winget -e Valve.Steam
 winget install -s winget -e VideoLAN.VLC
@@ -19,8 +27,8 @@ winget install -s winget -e VideoLAN.VLC
 winget install -s winget -e Microsoft.VisualStudio.2022.Community
 winget install -s winget -e Microsoft.VisualStudioCode
 winget install -s winget -e Microsoft.Windows.Terminal
+winget install -s winget -e Git.Git
 winget install -s winget -e TortoiseGit.TortoiseGit
-#winget install -s winget -e TortoiseSVN.TortoiseSVN
 winget install -s winget -e WinMerge.WinMerge
 
 # Development - Terminal
@@ -57,8 +65,15 @@ foreach ($font in $fonts)
 }
 Uninstall-Module PSWinGlue
 
-# No Packages (23-01-23)
-# MSI Afterburner
-# Nvidia Drivers
-# Paint.NET
-# Razer Synapse
+./res/windows/registry-utilities.ps1
+$registryFiles = (Get-ChildItem res\windows\*.reg)
+foreach ($registryFile in $registryFiles)
+{
+	regedit /s $registryFile
+}
+
+$registryScripts = (Get-ChildItem res\windows\*.ps1 -Exclude registry-utilities.ps1)
+foreach ($registryScript in $registryScripts)
+{
+	.$registryScript
+}

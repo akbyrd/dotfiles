@@ -5,22 +5,22 @@ $ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 $env:POSH_GIT_ENABLED = $true
 #Import-Module Terminal-Icons
 
-Function Inject-Command([String] $command) {
+function Inject-Command([String] $command) {
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
 	[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 
-Function Revert-LineAndPrediction {
+function Revert-LineAndPrediction {
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 }
 
-Function Edit-Profile { code $pwshProfile }
-Function Reload-Profile { .$pwshProfile }
-Function Edit-Theme { code $ompTheme }
-Function Exit-Shell { Exit }
+function Edit-Profile { code $pwshProfile }
+function Reload-Profile { .$pwshProfile }
+function Edit-Theme { code $ompTheme }
+function Exit-Shell { exit }
 
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -CompletionQueryItems 1e6
@@ -42,9 +42,9 @@ Set-PSReadLineKeyHandler -Chord "Shift+Ctrl+RightArrow" -Function SelectShellFor
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 	param($wordToComplete, $commandAst, $cursorPosition)
 		[Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
-		$Local:word = $wordToComplete.Replace('"', '""')
-		$Local:ast = $commandAst.ToString().Replace('"', '""')
-		winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
+		$local:word = $wordToComplete.Replace('"', '""')
+		$local:ast = $commandAst.ToString().Replace('"', '""')
+		winget complete --word="$local:word" --commandline "$local:ast" --position $cursorPosition | ForEach-Object {
 			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
 		}
 }

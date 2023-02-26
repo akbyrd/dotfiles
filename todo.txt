@@ -1,10 +1,9 @@
-general - move registry edits to this repo
+general - fix bindings for various settings files
 setup - Copy Argus profile
-setup - requires pwsh 7.3.2
 setup - needs to bootstrap
 	install pwsh, then run the rest of setup there
-	drop admin access asap
 pwsh - shift+up/dn select line
+pwsh - add descriptions for key handlers
 pwsh - Set-PSReadLineOption -Colors to match vscode
 pwsh - Set font in profile?
 pwsh - Extract vars to a separate script?
@@ -12,10 +11,13 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
+unreal - build from terminal (and use problems)
+vscode - pwsh doesn't respect ctrl+backspace (only happens in vscode)
 vscode - ctrl+shift+del doesn't work from second to last line in file if it's empty
 vscode - ctrl+shift+left doesn't work in search input
+vscode - ctrl+shift+home/end decide what to do
 vscode - pageup/down in find causes editor to scroll
-vscode - create theme test file for lua, c++/cli
+vscode - create theme test file for lua, c++/cli, powershell
 vscode - print a keybindings cheatsheet
 vscode - fix keybindings when debugging
 vscode - paste doesn't work in command responses in terminal
@@ -29,7 +31,6 @@ vscode - Test centered layout changes
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
-vscode - build Unreal from terminal (and use problems)
 vscode - make tasks use pwsh (I think they're using cmd atm)
 vscode - seed find with vertical selection
 vscode - QUESTION: textEditor.selection can be out of date. Is it possible to ensure it's up to date inside a command?
