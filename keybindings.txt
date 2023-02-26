@@ -56,11 +56,11 @@ Backspace        |+| Delete Char Left   | |                      |+| Delete Word
 Delete           |+| Delete Char Right  | |                      |+| Delete Word Right   |+| Delete Line Down      |+| Delete Subword Right   |+| Delete Chunk Down        |+| Ext - OS              |+| Delete Symbol Down      |
 Tab              |+| .                  | |                      |+| Indent Line         |+| Unindent Line         |+| Ext - OS               |+| Ext - OS                 |+| Ext - OS              |+| Ext - OS                |
 -=               |+| .                  |+| .                    |+| Cursor Loc History  |+| Cursor Edit History   | |                        | |                          | |                       | |                         |
-[]               |+| .                  |+| .                    |+| Fold Scope Recurse  |+| Fold Scope Single     |+| Fold All               | |                          |+| Open Settings Json    | |                         |
-\                |+| .                  |+| .                    |+| Split Editor        |+| Open Terminal         |+| Move Terminal          | |                          |+| Open Settings GUI     | |                         |
+[]               |+| .                  |+| .                    |+| Fold Scope Recurse  |+| Fold Scope Single     |+| Fold All               | |                          |+| Open Keybindings Json | |                         |
+\                |+| .                  |+| .                    |+| Split Editor        |+| Open Terminal         |+| Move Terminal          | |                          |+| Open Keybindings GUI  | |                         |
 ;'               |+| .                  |+| .                    |+| Move Cursor Bracket |+| Select Cursor Bracket | |                        | |                          |+| Move Cursor Problem   |+| Move Cursor Problem G   |
-,.               |+| .                  |+| .                    | | Move Cursor Fold    | | Select Cursor Fold    | |                        | |                          |+| Open Keybindings Json | |                         |
-/                |+| .                  |+| .                    |+| Scroll To Cursor    |+| Reveal File OS        |+| Pin Editor             | |                          |+| Open Keybindings GUI  | |                         |
+,.               |+| .                  |+| .                    | | Move Cursor Fold    | | Select Cursor Fold    | | Increment Literal      | |                          |+| Open Settings Json    | |                         |
+/                |+| .                  |+| .                    |+| Scroll To Cursor    |+| Reveal File OS        |+| Pin Editor             | |                          |+| Open Settings GUI     | |                         |
 q                |+| .                  |+| .                    |+| Code Actions        | |                       |+| Find - Case            | |                          | |                       | |                         |
 w                |+| .                  |+| .                    |+| Close Editor        |+| Close Window          |+| Find - Word            | |                          | |                       | |                         |
 e                |+| .                  |+| .                    |+| Focus Editor        |+| Toggle Explorer       |+| Find - Regex           | |                          | |                       | |                         |
@@ -73,7 +73,7 @@ o                |+| .                  |+| .                    |+| Go to Symbo
 p                |+| .                  |+| .                    |+| Go to File          |+| Command Palette       | |                        | |                          | |                       | |                         |
 a                |+| .                  |+| .                    |+| Select All          | |                       |+| Comment Line           | |                          | |                       | |                         |
 s                |+| .                  |+| .                    |+| Save                |+| Save As               |+| Reflow Comment         | |                          | |                       | |                         |
-d                |+| .                  |+| .                    |+|                     |+| Toggle Debug          |+| Format Line            | |                          | |                       | |                         |
+d                |+| .                  |+| .                    |+| Toggle Panel        |+| Toggle Debug          |+| Format Line            | |                          | |                       | |                         |
 f                |+| .                  |+| .                    |+| Find                |+| Toggle Find           |+| Mnemonic               | |                          | |                       | |                         |
 g                |+| .                  |+| .                    | |                     |+| Toggle Source Control | |                        | |                          | |                       | |                         |
 h                |+| .                  |+| .                    |+| Replace             |+| Toggle Replace        |+| Mnemonic               | |                          | | Rebuild File          | |                         |
@@ -84,7 +84,7 @@ z                |+| .                  |+| .                    |+| Undo       
 x                |+| .                  |+| .                    |+| Cut                 |+| Toggle Extensions     | |                        | |                          | |                       | |                         |
 c                |+| .                  |+| .                    |+| Copy                |+| Ext - Terminal        | |                        | |                          | |                       | |                         |
 v                |+| .                  |+| .                    |+| Paste               | |                       | |                        | |                          | |                       | |                         |
-b                |+| .                  |+| .                    | |                     | |                       | |                        | |                          | | Clean File            | |                         |
+b                |+| .                  |+| .                    |+| Toggle Sidebar      | |                       | |                        | |                          | | Clean File            | |                         |
 n                |+| .                  |+| .                    |+| New Editor          |+| New Window            |+| Maximize Panel         | |                          | | Clean Project         | |                         |
 m                |+| .                  |+| .                    | |                     | |                       |+| Maximize Editor        | |                          | | Clean Solution        | |                         |
 
@@ -95,3 +95,22 @@ Resources
 https://code.visualstudio.com/docs/getstarted/keybindings
 https://code.visualstudio.com/api/references/commands
 https://code.visualstudio.com/api/references/when-clause-contexts
+https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts
+
+
+
+Terminal Sequences
+------------------
+\u001b   - Esc
+\u007f   - Del
+ESC [    - Control Sequence Introducer (CSI)
+2        - Shift
+3        - Alt
+4        - Shift + Alt
+5        - Control
+6        - Shift + Control
+7        - Alt + Control
+8        - Shift + Alt + Control
+CSI Ps C - Cursor Forward by Ps
+CSI Ps D - Cursor Backward by Ps

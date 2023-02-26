@@ -7,6 +7,9 @@ Cannot bind the same key with various modifiers
 
 vscode
 ------
+Keybindings don't respect editorTextFocus in the find widget
+https://github.com/microsoft/vscode/issues/175444
+
 dupe
 Terminal text does not reflow if it's not visible when resizing the window
 https://github.com/microsoft/vscode/issues/172281

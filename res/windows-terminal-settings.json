@@ -28,7 +28,7 @@
                 "action": "openSettings",
                 "target": "settingsFile"
             },
-            "keys": "ctrl+alt+["
+            "keys": "ctrl+alt+comma"
         },
         {
             "command": "paste",
@@ -73,10 +73,6 @@
         },
         {
             "command": "unbound",
-            "keys": "ctrl+alt+comma"
-        },
-        {
-            "command": "unbound",
             "keys": "ctrl+period"
         },
         {
@@ -86,6 +82,18 @@
         {
             "command": "unbound",
             "keys": "ctrl+/"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+alt+["
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+alt+]"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+alt+\\"
         },
         {
             "command": 
@@ -107,7 +115,7 @@
                 "action": "openSettings",
                 "target": "defaultsFile"
             },
-            "keys": "ctrl+alt+]"
+            "keys": "ctrl+alt+period"
         },
         {
             "command": "closePane",
@@ -123,7 +131,7 @@
                 "action": "openSettings",
                 "target": "settingsUI"
             },
-            "keys": "ctrl+alt+\\"
+            "keys": "ctrl+alt+/"
         },
         {
             "command": 

@@ -26,17 +26,12 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -CompletionQueryItems 1e6
 
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ForwardWord
-Set-PSReadLineKeyHandler -Chord "Ctrl+w" -ScriptBlock { Inject-Command("Exit-Shell") }
-Set-PSReadLineKeyHandler -Chord "Ctrl+l" -ScriptBlock { Inject-Command("Clear-Host") }
-Set-PSReadLineKeyHandler -Chord "Escape" -ScriptBlock { Revert-LineAndPrediction }
-Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -ScriptBlock { Inject-Command("Edit-Profile") }
-Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+>" -ScriptBlock { Inject-Command("Reload-Profile") }
-Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -ScriptBlock { Inject-Command("Edit-Theme") }
-Set-PSReadLineKeyHandler -Chord "Ctrl+LeftArrow" -Function ShellBackwardWord
-Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ShellForwardWord
-Set-PSReadLineKeyHandler -Chord "Shift+Ctrl+LeftArrow" -Function SelectShellBackwardWord
-Set-PSReadLineKeyHandler -Chord "Shift+Ctrl+RightArrow" -Function SelectShellForwardWord
+Set-PSReadLineKeyHandler -Chord "Ctrl+w"       -Description "Exit-Shell"     -ScriptBlock { Inject-Command("Exit-Shell") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+l"       -Description "Clear-Host"     -ScriptBlock { Inject-Command("Clear-Host") }
+Set-PSReadLineKeyHandler -Chord "Escape"       -Description "Revert-Line"    -ScriptBlock { Revert-LineAndPrediction }
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -Description "Edit-Profile"   -ScriptBlock { Inject-Command("Edit-Profile") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+>" -Description "Reload-Profile" -ScriptBlock { Inject-Command("Reload-Profile") }
+Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -Description "Edit-Theme"     -ScriptBlock { Inject-Command("Edit-Theme") }
 
 # Tab auto-completion for winget
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
