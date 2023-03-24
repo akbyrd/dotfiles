@@ -24,12 +24,20 @@ winget install -s winget -e Valve.Steam
 winget install -s winget -e VideoLAN.VLC
 
 # Development - General
-winget install -s winget -e Microsoft.VisualStudio.2022.Community
 winget install -s winget -e Microsoft.VisualStudioCode
 winget install -s winget -e Microsoft.Windows.Terminal
 winget install -s winget -e Git.Git
 winget install -s winget -e TortoiseGit.TortoiseGit
 winget install -s winget -e WinMerge.WinMerge
+
+# Development - Visual Studio
+winget install -s winget -e Microsoft.VisualStudio.2022.Community
+$vsInstallDir = (."${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -property installationPath)
+$msbuildDir = "$vsInstallDir\Msbuild\Current\Bin"
+$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
+$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable("PATH", "$userPath;$msbuildDir", [System.EnvironmentVariableTarget]::User)
 
 # Development - Terminal
 $terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
