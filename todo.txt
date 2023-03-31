@@ -1,11 +1,11 @@
-dotfiles - add save and apply commands to sync settings
+dotfiles - Add save and apply commands to sync settings
 setup - Copy Argus profile
 setup - bootstrap - install pwsh, then run the rest of setup there
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd
 psreadline - BUG: SelectLine/SelectBackwardsLine
 psreadline - BUG: Missing SelectNextWordEnd
-pwsh - update tab bindings
+pwsh - Update tab bindings
 pwsh - Set-PSReadLineOption -Colors to match vscode
 pwsh - Set font in profile?
 pswh - Add 'which' command with tab completion
@@ -13,8 +13,11 @@ pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
 unreal - build from terminal (and use problems)
-vscode - create theme test file for lua, c++/cli, powershell
-vscode - fix keybindings when debugging
+vscode - Fix down in local find re-seeding the search
+vscode - Disable alt+r in global find
+vscode - Add keybinding for tgit log
+vscode - Create theme test file for lua, c++/cli, powershell
+vscode - Fix keybindings when debugging
 vscode - Show friendly name for commands in keybindings GUI
 vscode - Keep cursor centered (only) when scrolling
 vscode - Find an extension for bookmarks
@@ -22,8 +25,8 @@ vscode - Test centered layout changes
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
-vscode - make tasks use pwsh (I think they're using cmd atm)
-vscode - seed find with vertical selection
+vscode - Make tasks use pwsh (I think they're using cmd atm)
+vscode - Seed find with vertical selection
 vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
 vscode - BUG: Settings file comments erased at beginning
 vscode - BUG: Keybindings file last binding reformatted
@@ -36,7 +39,7 @@ vscode-ext - Move Line Up/Down that works with vertical selection
 vscode-ext - Faster Arrow Keys
 vscode-ext - Fold Except Preprocessor
 vscode-ext - Focus Prev/Next Terminal Editor
-vscode-ext - keep symbols for all active editors, even if unfocused
+vscode-ext - Keep symbols for all active editors, even if unfocused
 vscode-ts - BUG: Can't distinguish property functions and type fields
 vscode-ts - BUG: Template parameters have variable.other.readwrite.ts scope
 win - Keybinding to move window to other desktop
