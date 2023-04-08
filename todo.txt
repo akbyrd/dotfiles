@@ -21,7 +21,6 @@ vscode - Fix keybindings when debugging
 vscode - Show friendly name for commands in keybindings GUI
 vscode - Keep cursor centered (only) when scrolling
 vscode - Find an extension for bookmarks
-vscode - Test centered layout changes
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
