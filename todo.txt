@@ -13,6 +13,7 @@ pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
 unreal - build from terminal (and use problems)
+vscode - Make find widget respect folding
 vscode - Fix down in local find re-seeding the search
 vscode - Disable alt+r in global find
 vscode - Add keybinding for tgit log
@@ -27,12 +28,18 @@ vscode - Experiment with live share
 vscode - Make tasks use pwsh (I think they're using cmd atm)
 vscode - Seed find with vertical selection
 vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
+vscode - BUG: Line highlight is on each line
 vscode - BUG: Settings file comments erased at beginning
 vscode - BUG: Keybindings file last binding reformatted
 vscode - BUG: Horizontal scroll
 vscode - BUG: List can't tell if single selection
 vscode - BUG: List can't tell if focus is selected
 vscode - BUG: List expand selection is _super_ weird
+vscode-ext - Remember last child when focusing another editor group
+vscode-ext - Respect code folding when navigating symbols
+vscode-ext - Fix highlight on folded code
+vscode-ext - Status bar message when no symbols available
+vscode-ext - Fall back to folding based movement when symbols aren't available
 vscode-ext - Move/Select Cursor Scope
 vscode-ext - Move Line Up/Down that works with vertical selection
 vscode-ext - Faster Arrow Keys
