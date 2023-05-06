@@ -12,41 +12,42 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
-unreal - build from terminal (and use problems)
+vscode-cpptools - redesign support for unreal configuration and build
+vscode - Bindings - tgit log
+vscode - Bindings - repeat lines above/below
+vscode - Bindings - Fix keybindings when debugging
+vscode - Bindings - Fix escape in keybindings GUI
+vscode - Bindings - Disable alt+r in global find
+vscode - Bindings - Add keybinding for tgit log
 vscode - Make find widget respect folding
 vscode - Fix down in local find re-seeding the search
-vscode - Disable alt+r in global find
-vscode - Add keybinding for tgit log
-vscode - Create theme test file for lua, c++/cli, powershell
-vscode - Fix keybindings when debugging
-vscode - Show friendly name for commands in keybindings GUI
+vscode - Seed find with vertical selection
 vscode - Keep cursor centered (only) when scrolling
 vscode - Find an extension for bookmarks
+vscode - Experiment with copilot
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
-vscode - Make tasks use pwsh (I think they're using cmd atm)
-vscode - Seed find with vertical selection
 vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
+vscode - BUG: Escape cancels bindings and search in bindings UI
 vscode - BUG: Line highlight is on each line
 vscode - BUG: Settings file comments erased at beginning
 vscode - BUG: Keybindings file last binding reformatted
-vscode - BUG: Horizontal scroll
 vscode - BUG: List can't tell if single selection
 vscode - BUG: List can't tell if focus is selected
 vscode - BUG: List expand selection is _super_ weird
-vscode-ext - Remember last child when focusing another editor group
-vscode-ext - Respect code folding when navigating symbols
-vscode-ext - Fix highlight on folded code
-vscode-ext - Status bar message when no symbols available
-vscode-ext - Fall back to folding based movement when symbols aren't available
-vscode-ext - Move/Select Cursor Scope
-vscode-ext - Move Line Up/Down that works with vertical selection
-vscode-ext - Faster Arrow Keys
-vscode-ext - Fold Except Preprocessor
-vscode-ext - Focus Prev/Next Terminal Editor
-vscode-ext - Keep symbols for all active editors, even if unfocused
-vscode-ts - BUG: Can't distinguish property functions and type fields
-vscode-ts - BUG: Template parameters have variable.other.readwrite.ts scope
+vscode-theme - Create theme test file for lua, c++/cli, powershell
+vscode-ext - See if the is a persistent state store for documents to avoid re-applying highlights
+vscode-ext - Move Line Up/Down - fix with vertical selection
+vscode-ext - Move Line Up/Down - fix cursor on second line with no selection
+vscode-ext - Move Line Up/Down - respect folding
+vscode-ts - Type members don't have symbols
 win - Keybinding to move window to other desktop
 win - Replace task manager with process explorer
+
+
+
+Blocked
+-------
+vscode-ext - Faster arrow keys
+vscode-ext - Symbol navigation - fix highlight on folded symbols
