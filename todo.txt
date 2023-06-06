@@ -29,6 +29,8 @@ vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
 vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
+vscode - BUG: Can't find files in Dragon/Tools
+vscode - BUG: Autocomplete only happening on first line with multiple cursors
 vscode - BUG: Escape cancels bindings and search in bindings UI
 vscode - BUG: Line highlight is on each line
 vscode - BUG: Settings file comments erased at beginning
@@ -38,6 +40,8 @@ vscode - BUG: List can't tell if focus is selected
 vscode - BUG: List expand selection is _super_ weird
 vscode-theme - Create theme test file for lua, c++/cli, powershell
 vscode-ext - See if the is a persistent state store for documents to avoid re-applying highlights
+vscode-ext - I don't think templates are folded
+vscode-ext - Fold lambdas inside variable declarations
 vscode-ext - Move Line Up/Down - fix with vertical selection
 vscode-ext - Move Line Up/Down - fix cursor on second line with no selection
 vscode-ext - Move Line Up/Down - respect folding
