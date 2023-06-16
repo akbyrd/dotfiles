@@ -1,6 +1,5 @@
+bookmarks - BUG: Doesn't work in settings.json, keybindings.json
 dotfiles - Add save and apply commands to sync settings
-setup - Copy Argus profile
-setup - bootstrap - install pwsh, then run the rest of setup there
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd
 psreadline - BUG: SelectLine/SelectBackwardsLine
@@ -12,46 +11,83 @@ pswh - Add 'which' command with tab completion
 pswh - Search for public dotfiles on github
 	https://github.com/SeeminglyScience/dotfiles
 	https://gist.github.com/SteveL-MSFT/a208d2bd924691bae7ec7904cab0bd8e
-vscode-cpptools - redesign support for unreal configuration and build
-vscode - Bindings - tgit log
+setup - Copy Argus profile
+setup - bootstrap - install pwsh, then run the rest of setup there
+vscode - Contribution - https://github.com/microsoft/vscode/issues/180472 - move line multiple cursor support
+vscode - Contribution - https://github.com/microsoft/vscode/issues/180473 - move line inconsistency
+vscode - Contribution - moveEditorToNextGroup/moveEditorToPreviousGroup difference
+vscode - Contribution - copy paste with multiple cursor has different behavior
+vscode - Contribution - https://github.com/microsoft/vscode/issues/174162 - don't pin tabs with moveEditorLeftInGroup
+vscode - Contribution - https://github.com/microsoft/vscode/issues/174161 - terminal editors don't set activeEditorIsPinned
+vscode - Contribution - https://github.com/microsoft/vscode/issues/174770 - list expansion commands
+vscode - Contribution - https://github.com/microsoft/vscode/issues/174768 - list expansion commands
+vscode - Contribution - https://github.com/microsoft/vscode/issues/88682  - list expansion commands
+vscode - Contribution - https://github.com/microsoft/vscode/issues/94820  - list expansion commands
+vscode - Contribution - https://github.com/microsoft/vscode/issues/95375  - clipped search results
+vscode - Contribution - https://github.com/microsoft/vscode/issues/99171  - fix fuzzy matching
+vscode - Contribution - https://github.com/microsoft/vscode/issues/27317  - fix fuzzy matching
+vscode - Contribution - https://github.com/microsoft/vscode/issues/181088 - range highlight
+vscode - Contribution - https://github.com/microsoft/vscode/issues/31819  - search ignore open editors
+vscode - Contribution - https://github.com/microsoft/vscode/issues/106209 - editor decorators disappearing
+vscode - Contribution - https://github.com/microsoft/vscode/issues/106209 - editor decorators disappearing
+vscode - Contribution - https://github.com/microsoft/vscode/issues/173240 - moved terminal context
+vscode - Contribution - https://github.com/microsoft/vscode/issues/181667 - editor context
+vscode - Contribution - https://github.com/microsoft/vscode/issues/181233 - spurious selection change events
+vscode - Contribution - https://github.com/microsoft/vscode/issues/174877 - bind escape when renaming file
+vscode - Contribution - https://github.com/microsoft/vscode/issues/93631  - firefox drag and drop
+vscode - Contribution - https://github.com/microsoft/vscode/issues/74637  - two column search results
+vscode - Contribution - https://github.com/microsoft/vscode/issues/72972  - window pinning break on reload
+vscode - Contribution - https://github.com/microsoft/vscode/issues/58745  - window pinning break on reload
+vscode - Contribution - don't special case "debug" and "view" in command palette
+vscode - Contribution - improve revealAllCursors behavior (reveal closest if none are visible)
+vscode - Contribution - set primary cursor more often (reveal primary cursor more often?)
+vscode - Contribution - fix glob support
+vscode - Contribution - fix textmate support
+vscode - Contribution - implement a way to associate symbols and the folding ranges they cause
+vscode - Show line highlight when range is selected
+vscode - Bindings - set anchor position
 vscode - Bindings - repeat lines above/below
 vscode - Bindings - Fix keybindings when debugging
-vscode - Bindings - Fix escape in keybindings GUI
 vscode - Bindings - Disable alt+r in global find
-vscode - Bindings - Add keybinding for tgit log
 vscode - Make find widget respect folding
 vscode - Fix down in local find re-seeding the search
 vscode - Seed find with vertical selection
 vscode - Keep cursor centered (only) when scrolling
-vscode - Find an extension for bookmarks
 vscode - Experiment with copilot
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
-vscode - REQUEST: cursorWordPart and selection wrapping doesn't work in input boxes
 vscode - BUG: Can't find files in Dragon/Tools
 vscode - BUG: Autocomplete only happening on first line with multiple cursors
-vscode - BUG: Escape cancels bindings and search in bindings UI
-vscode - BUG: Line highlight is on each line
+vscode - BUG: focus is busted in watch window
+vscode - BUG: msbuild matcher doesn't work if terminal text wraps
+vscode - BUG: clicking and dragging on line numbers doesn't work with multiple cursors
+vscode - BUG: can't click near top of editor
+vscode - BUG: left gutter click regions are a mess
+vscode - BUG: focusedView gets stuck set to search
+vscode - BUG: moveEditorToPrevousGroup and moveEditorToNextGroup have different behavior at boundaries
 vscode - BUG: Settings file comments erased at beginning
 vscode - BUG: Keybindings file last binding reformatted
 vscode - BUG: List can't tell if single selection
 vscode - BUG: List can't tell if focus is selected
 vscode - BUG: List expand selection is _super_ weird
-vscode-theme - Create theme test file for lua, c++/cli, powershell
-vscode-ext - See if the is a persistent state store for documents to avoid re-applying highlights
+vscode - BUG: editor.action.inPlaceReplace up and down are backwards
+vscode-cpptools - Contribution - improve folding ranges
+vscode-cpptools - Contribution - redesign support for unreal configuration and build
 vscode-ext - I don't think templates are folded
 vscode-ext - Fold lambdas inside variable declarations
+vscode-ext - parent parent child broken
+vscode-ext - Does "visible ranges" make it possible to fix the highlight on folded symbols?
+vscode-ext - See if there is a persistent state store for documents to avoid re-applying highlights
 vscode-ext - Move Line Up/Down - fix with vertical selection
 vscode-ext - Move Line Up/Down - fix cursor on second line with no selection
 vscode-ext - Move Line Up/Down - respect folding
+vscode-textmate - Contribution - https://github.com/microsoft/vscode-textmate/issues/52 - Implement exclusion and other selectors
+vscode-theme - overhaul search colors - local (a), global (b), editor (b)
+vscode-theme - ts namespaces (jsonSchemaCommon.ts)
+vscode-theme - ts import aliases
+vscode-theme - Create theme test file for lua, c++/cli, powershell
 vscode-ts - Type members don't have symbols
 win - Keybinding to move window to other desktop
 win - Replace task manager with process explorer
-
-
-
-Blocked
--------
-vscode-ext - Faster arrow keys
-vscode-ext - Symbol navigation - fix highlight on folded symbols
+xterm.js - Contribution - https://github.com/xtermjs/xterm.js/issues/4231 - teminal reflow
