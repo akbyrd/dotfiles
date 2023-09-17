@@ -58,6 +58,7 @@ Install-Module Terminal-Icons -Repository PSGallery
 $ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
 New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
 .$pwshProfile
+oh-my-posh disable notice
 
 Install-Module PSWinGlue
 Import-Module PSWinGlue
