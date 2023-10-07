@@ -33,11 +33,13 @@ winget install -s winget -e WinMerge.WinMerge
 # Development - Visual Studio
 winget install -s winget -e Microsoft.VisualStudio.2022.Community
 $vsInstallDir = (."${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -property installationPath)
-$msbuildDir = "$vsInstallDir\Msbuild\Current\Bin"
+$msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
 $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
 $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
-$userPath = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-[System.Environment]::SetEnvironmentVariable("PATH", "$userPath;$msbuildDir", [System.EnvironmentVariableTarget]::User)
+
+$machPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+$userPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::User)
+$env:Path = "$machPath;$userPath;$msBuildDir"
 
 # Development - Terminal
 $terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"

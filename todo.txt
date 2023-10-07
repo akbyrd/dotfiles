@@ -1,5 +1,7 @@
 bookmarks - BUG: Doesn't work in settings.json, keybindings.json
 dotfiles - Add save and apply commands to sync settings
+dotfiles - Load VS settings (and vscode?)
+dotfiles - Set execution policy for Windows Powershell
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd
 psreadline - BUG: SelectLine/SelectBackwardsLine
