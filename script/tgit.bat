@@ -1,3 +1,3 @@
-@ECHO off
+@ECHO OFF
 
-START TortoiseGitProc.exe /command:%*
+START TortoiseGitProc /path:"%cd%" /command:%*
