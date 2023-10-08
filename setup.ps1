@@ -9,6 +9,7 @@ $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # TODO: Decide what to do about hard linking
 # TODO: Implement save and restore
+# TODO: script is ending up in path twice
 
 # TODO: Remove this
 winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
@@ -63,14 +64,14 @@ $env:Path = "$machPath;$userPath"
 # Config- Terminal
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Stop-Process -Name WindowsTerminal 2> $null
-#New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
-Copy-Item -Force -Path "res/windows-terminal-settings.json" -Destination $terminalSettings
+#New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res\windows-terminal-settings.json
+Copy-Item -Force -Path "res\windows-terminal-settings.json" -Destination $terminalSettings
 
 # Config - PowerShell
 Set-ExecutionPolicy Bypass
 $pwshProfile = $Profile.CurrentUserAllHosts
-#New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
-Copy-Item -Force -Path "res/pwsh-profile.ps1" -Destination $pwshProfile
+#New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res\pwsh-profile.ps1"
+Copy-Item -Force -Path "res\pwsh-profile.ps1" -Destination $pwshProfile
 
 # Development - PowerShell Appearance
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
@@ -78,15 +79,15 @@ Install-Module -Repository PSGallery "posh-git"
 Install-Module -Repository PSGallery "Terminal-Icons"
 $pwshProfileDir = Split-Path $pwshProfile
 $ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
-#New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res/oh-my-posh-theme.omp.json"
-Copy-Item -Force -Path "res/oh-my-posh-theme.omp.json" -Destination $ompTheme
+#New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res\oh-my-posh-theme.omp.json"
+Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
 
 .$pwshProfile
 oh-my-posh disable notice
 
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module -DisableNameChecking "PSWinGlue"
-./fonts.ps1
+.\fonts.ps1
 foreach ($font in $fonts)
 {
 	$baseURL = "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
@@ -103,7 +104,7 @@ Uninstall-Module PSWinGlue
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
 
-./res/windows/registry-utilities.ps1
+.\res\windows\registry-utilities.ps1
 $registryFiles = Get-ChildItem "res\windows\*.reg"
 foreach ($registryFile in $registryFiles)
 {

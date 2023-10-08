@@ -41,7 +41,7 @@ if (!$winget)
 	for ($i = 0; $i -lt $wingetUrls.Length; $i++)
 	{
 		$url = $wingetUrls[$i]
-		$filename = "$tempDir/WingetFile_$i.msixbundle";
+		$filename = "$tempDir\WingetFile_$i.msixbundle";
 
 		Invoke-WebRequest -Uri $url -OutFile $filename
 		Add-AppxPackage $filename
@@ -65,6 +65,6 @@ git clone "https://github.com/akbyrd/dotfiles.git"
 
 Push-Location dotfiles
 Set-ExecutionPolicy Bypass
-pwsh -Command ./setup.ps1
+pwsh -Command .\setup.ps1
 Pop-Location
 Reload-Path
