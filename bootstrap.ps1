@@ -16,13 +16,7 @@
 # and multiple windows
 #Requires -RunAsAdministrator
 
-$SysEnv = [System.Environment]
-$EnvVar = [System.EnvironmentVariableTarget]
-
-# Install winget if it's not already installed
-($winget = Get-Command -CommandType Application winget) *> $null
-if (!$winget)
-{
+function Install-WinGet {
 	# Using github instead of the store since it's not guaranteed to be installed (Windows Sandbox,
 	# corporate environments, etc).
 	# https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
@@ -54,9 +48,18 @@ if (!$winget)
 }
 
 function Reload-Path {
+	$SysEnv = [System.Environment]
+	$EnvVar = [System.EnvironmentVariableTarget]
+
 	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 	$env:Path = "$machPath;$userPath"
+}
+
+# Install winget if it's not already installed
+($winget = Get-Command -CommandType Application winget) *> $null
+if (!$winget) {
+	Install-WinGet
 }
 
 winget install -s winget "Git.Git"; ""
@@ -64,10 +67,8 @@ winget install -s winget -e "Microsoft.PowerShell"; ""
 Reload-Path
 
 git clone "https://github.com/akbyrd/dotfiles.git"
-
-Push-Location dotfiles
+Push-Location "dotfiles"
 Set-ExecutionPolicy Bypass
-#pwsh -Command .\setup.ps1
-pwsh -Command .\font-test.ps1
+pwsh -Command { .\"setup.ps1" }
 Pop-Location
 Reload-Path

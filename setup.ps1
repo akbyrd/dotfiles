@@ -8,7 +8,6 @@ $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $userPath = "$userPath;$dotfilesDir\bin"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
-# TODO: Fix fonts
 # TODO: Move things into functions
 # TODO: Allow script to be run multiple times
 # TODO: Decide what to do about hard linking
@@ -17,17 +16,12 @@ $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 # TODO: Set font for Windows PowerShell terminal
 # TODO: Setup profile for Windows PowerShell
 
-# TODO: Remove this
-winget install -s winget -e "JanDeDobbeleer.OhMyPosh"; ""
-winget install -s winget -e "Microsoft.WindowsTerminal"; ""
-
 # No Packages (23-01-23)
 # MSI Afterburner
 # Nvidia Drivers
 # Paint.NET
 # Razer Synapse
 
-<#
 # Standard
 winget install -s winget -e "7zip.7zip"
 winget install -s winget -e "Argotronic.ArgusMonitor"
@@ -60,7 +54,6 @@ $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86
 $machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $env:Path = "$machPath;$userPath;$msBuildDir"
-#>
 
 # Update path so oh-my-posh can be configured
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
@@ -106,24 +99,25 @@ function Install-Fonts
 	$headers = @{ Accept = "application/vnd.github.raw" }
 	$result = iwr -UseBasicParsing -Headers $headers -Uri $fontUrl
 	$fontFiles = ConvertFrom-JSON $result.Content
-foreach ($fontFile in $fontFiles)
-{
-	if ($fontFile.name.EndsWith(".ttf"))
+	foreach ($fontFile in $fontFiles)
 	{
-		Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
-	}
-}
+		if ($fontFile.name.EndsWith(".ttf"))
+		{
+			Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
 
-Install-Font -Verbose . -Scope User -Method Manual
+			# Workaround for the fact taht Install-Font ends up holding a file lock until PowerShell is closed.
+			# This only happens with the Manual method, but the Shell method doesn't work in Windows Sandbox so
+			# we can't avoid it.
+			# https://github.com/ralish/PSWinGlue/issues/9
+			pwsh -Command {
+				.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
+			}
 
-foreach ($fontFile in $fontFiles)
-{
-	if ($fontFile.name.EndsWith(".ttf"))
-	{
-		Remove-Item $fontFile.name
+			Remove-Item $fontFile.name
+		}
 	}
-}
-Remove-Item "Install-Font.ps1"
+
+	Remove-Item "Install-Font.ps1"
 
 	$progressPreference = "Continue"
 	Pop-Location
@@ -133,7 +127,6 @@ Remove-Item "Install-Font.ps1"
 }
 Install-Fonts
 
-<#
 # Suppress errors to workaround a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
@@ -150,4 +143,3 @@ foreach ($registryScript in $registryScripts)
 {
 	.$registryScript
 }
-#>
