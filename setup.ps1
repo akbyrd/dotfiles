@@ -8,6 +8,8 @@ $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $userPath = "$userPath;$dotfilesDir\bin"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
+# TODO: Fix dism in Windows Sandbox
+# TODO: Fix registry-utilities in Windows Sandbox
 # TODO: Move things into functions
 # TODO: Allow script to be run multiple times
 # TODO: Decide what to do about hard linking
@@ -129,7 +131,7 @@ Install-Fonts
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
 
-.\res\windows\registry-utilities.ps1
+.\"res\windows\registry-utilities.ps1"
 $registryFiles = Get-ChildItem "res\windows\*.reg"
 foreach ($registryFile in $registryFiles)
 {
