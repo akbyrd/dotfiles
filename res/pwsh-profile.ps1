@@ -18,6 +18,15 @@ function Revert-LineAndPrediction {
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 }
 
+function Reload-Path {
+	$SysEnv = [System.Environment]
+	$EnvVar = [System.EnvironmentVariableTarget]
+
+	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
+	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+	$env:Path = "$machPath;$userPath"
+}
+
 function Edit-Profile { code $pwshProfile }
 function Reload-Profile { .$pwshProfile }
 function Edit-Theme { code $ompTheme }

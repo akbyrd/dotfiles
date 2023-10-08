@@ -53,10 +53,8 @@ $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $env:Path = "$machPath;$userPath;$msBuildDir"
 #>
 
-# Update path so oh-my-posh
-$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
-$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
-$env:Path = "$machPath;$userPath"
+# Update path so oh-my-posh can be configured
+Reload-Path
 
 # Config- Terminal
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
