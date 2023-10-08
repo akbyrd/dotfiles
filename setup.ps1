@@ -85,6 +85,7 @@ Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
 .$pwshProfile
 oh-my-posh disable notice
 
+<#
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module -DisableNameChecking "PSWinGlue"
 .\fonts.ps1
@@ -99,7 +100,6 @@ foreach ($font in $fonts)
 }
 Uninstall-Module PSWinGlue
 
-<#
 # Suppress errors to workaround a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
