@@ -1,11 +1,11 @@
 $SysEnv = [System.Environment]
 $EnvVar = [System.EnvironmentVariableTarget]
 
-# Add script folder to path
+# Add bin folder to path
 $setupPath = $MyInvocation.MyCommand.Path
 $dotfilesDir = Split-Path $setupPath
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
-$userPath = "$userPath;$dotfilesDir\script"
+$userPath = "$userPath;$dotfilesDir\bin"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # TODO: Fix fonts
@@ -124,7 +124,7 @@ foreach ($font in $fonts)
 	$path = "$baseURL/$($font.name)/complete/$($font.file)"
 	$path = $path.replace(" ", "%20")
 	curl -Lo $font.file $path
-	Install-Font $font.file -Scope User -Method Shell
+	Install-Font -Verbose $font.file -Scope User -Method Shell
 	Remove-Item $font.file
 }
 Uninstall-Module PSWinGlue
