@@ -7,6 +7,9 @@ $dotfilesDir = Split-Path $setupPath
 $userPath = "$userPath;$dotfilesDir\script"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
+# TODO: Decide what to do about hard linking
+# TODO: Implement save and restore
+
 # TODO: Remove this
 winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
 winget install -s winget -e "Microsoft.WindowsTerminal"
@@ -66,12 +69,8 @@ Copy-Item -Force -Path "res/windows-terminal-settings.json" -Destination $termin
 # Config - PowerShell
 Set-ExecutionPolicy Bypass
 $pwshProfile = $Profile.CurrentUserAllHosts
-New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
-
-<#
-# Suppress errors to workaround a problem with PSReadLine
-# https://github.com/PowerShell/PSReadLine/issues/3359
-Update-Help 2> $null
+#New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
+Copy-Item -Force -Path "res/pwsh-profile.ps1" -Destination $pwshProfile
 
 # Development - PowerShell Appearance
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
@@ -79,7 +78,9 @@ Install-Module -Repository PSGallery "posh-git"
 Install-Module -Repository PSGallery "Terminal-Icons"
 $pwshProfileDir = Split-Path $pwshProfile
 $ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
-New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res/oh-my-posh-theme.omp.json"
+#New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res/oh-my-posh-theme.omp.json"
+Copy-Item -Force -Path "res/oh-my-posh-theme.omp.json" -Destination $ompTheme
+
 .$pwshProfile
 oh-my-posh disable notice
 
@@ -96,6 +97,11 @@ foreach ($font in $fonts)
 	Remove-Item $font.file
 }
 Uninstall-Module PSWinGlue
+
+<#
+# Suppress errors to workaround a problem with PSReadLine
+# https://github.com/PowerShell/PSReadLine/issues/3359
+Update-Help 2> $null
 
 ./res/windows/registry-utilities.ps1
 $registryFiles = Get-ChildItem "res\windows\*.reg"

@@ -67,7 +67,4 @@ Push-Location dotfiles
 Set-ExecutionPolicy Bypass
 pwsh -Command ./setup.ps1
 Pop-Location
-
 Reload-Path
-$pwshProfile = $Profile.CurrentUserAllHosts
-.$pwshProfile
