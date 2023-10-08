@@ -82,8 +82,8 @@ New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res/oh-my-posh-theme
 .$pwshProfile
 oh-my-posh disable notice
 
-Install-Module -DisableNameChecking -Repository PSGallery "PSWinGlue"
-Import-Module PSWinGlue
+Install-Module -Repository PSGallery "PSWinGlue"
+Import-Module -DisableNameChecking "PSWinGlue"
 <#
 ./fonts.ps1
 foreach ($font in $fonts)
