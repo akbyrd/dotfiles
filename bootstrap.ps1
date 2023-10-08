@@ -60,4 +60,5 @@ $env:Path = "$machPath;$userPath"
 
 git clone "https://github.com/akbyrd/dotfiles.git"
 Set-Location dotfiles
+Set-ExecutionPolicy -Scope Process Bypass
 ./setup.ps1
