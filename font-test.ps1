@@ -1,40 +1,18 @@
-class Font
-{
-	$name
-	$file
-}
-
-$fonts = [Font[]] (
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Regular Nerd Font Complete Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Bold Nerd Font Complete Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Regular Nerd Font Complete Mono Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Bold Nerd Font Complete Mono Windows Compatible.ttf"
-	}
-)
-
 Set-ExecutionPolicy Bypass
-$hash = "c4946587a5978a119165181935e36faa4bbc0bb5"
-$url = "https://raw.githubusercontent.com/ralish/PSWinGlue/$hash/Scripts/Install-Font.ps1"
-Invoke-WebRequest $url -OutFile "Install-Font.ps1"
-foreach ($i in 1..1)
+$installFontUrl = "https://raw.githubusercontent.com/ralish/PSWinGlue/master/Scripts/Install-Font.ps1"
+Invoke-WebRequest $installFontUrl -OutFile "Install-Font.ps1"
+
+$fontUrl = "https://api.github.com/repos/ryanoasis/nerd-fonts/contents/patched-fonts/Inconsolata"
+$headers = @{ Accept = "application/vnd.github.raw" }
+$result = iwr -UseBasicParsing -Headers $headers -Uri $fontUrl
+$fontFiles = ConvertFrom-JSON $result.Content
+foreach ($fontFile in $fontFiles)
 {
-	$font = $fonts[$i]
-	$baseURL = "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
-	$path = "$baseURL/$($font.name)/complete/$($font.file)"
-	$path = $path.replace(" ", "%20")
-	curl -Lo $font.file $path
-	.\Install-Font.ps1 $font.file -Scope User -Method Shell
-	Remove-Item $font.file
+	if ($fontFile.name.EndsWith(".ttf"))
+	{
+		Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
+		.\Install-Font.ps1 $font.file -Scope User -Method Shell
+		Remove-Item $fontFile.name
+	}
 }
 Remove-Item "Install-Font.ps1"
