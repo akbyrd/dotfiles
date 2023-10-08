@@ -8,8 +8,13 @@ $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $userPath = "$userPath;$dotfilesDir\script"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
+# TODO: Fix fonts
+# TODO: Allow script to be run multiple times
 # TODO: Decide what to do about hard linking
 # TODO: Implement save and restore
+# TODO: Set font for PowerShell terminal
+# TODO: Set font for Windows PowerShell terminal
+# TODO: Setup profile for Windows PowerShell
 
 # TODO: Remove this
 winget install -s winget -e "JanDeDobbeleer.OhMyPosh"; ""
