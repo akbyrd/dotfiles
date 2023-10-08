@@ -1,3 +1,5 @@
+Set-ExecutionPolicy Bypass
+
 $tempDir = "fonts"
 New-Item $tempDir -ItemType Directory -Force | Out-Null
 Push-Location $tempDir
@@ -15,18 +17,19 @@ foreach ($fontFile in $fontFiles)
 	if ($fontFile.name.EndsWith(".ttf"))
 	{
 		Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
-	}
-}
 
-.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
+		# Workaround for the fact taht Install-Font ends up holding a file lock until PowerShell is closed.
+		# This only happens with the Manual method, but the Shell method doesn't work in Windows Sandbox so
+		# we can't avoid it.
+		# https://github.com/ralish/PSWinGlue/issues/9
+		pwsh -Command {
+			.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
+		}
 
-foreach ($fontFile in $fontFiles)
-{
-	if ($fontFile.name.EndsWith(".ttf"))
-	{
 		Remove-Item $fontFile.name
 	}
 }
+
 Remove-Item "Install-Font.ps1"
 
 $progressPreference = "Continue"
