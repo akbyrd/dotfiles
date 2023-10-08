@@ -8,7 +8,6 @@ $userPath = "$userPath;$dotfilesDir\script"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # TODO: Remove this
-Get-Host
 winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
 winget install -s winget -e "Microsoft.WindowsTerminal"
 
@@ -54,7 +53,9 @@ $env:Path = "$machPath;$userPath;$msBuildDir"
 #>
 
 # Update path so oh-my-posh can be configured
-Reload-Path
+$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
+$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+$env:Path = "$machPath;$userPath"
 
 # Config- Terminal
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
