@@ -68,14 +68,11 @@ Copy-Item -Force -Path $terminalSettings -Destination "res/windows-terminal-sett
 $pwshProfile = $Profile.CurrentUserAllHosts
 New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
 
-# Unload and reload is a workaround for an error caused by PSReadLine
+# Suppress errors to workaroudn a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
-Remove-Module PSReadLine
-Import-Module PSReadLine
-Update-Help
+Update-Help 2> $null
 
 # Development - PowerShell Appearance
-Install-PackageProvider -Name NuGet -Force
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Repository PSGallery "posh-git"
 Install-Module -Repository PSGallery "Terminal-Icons"
