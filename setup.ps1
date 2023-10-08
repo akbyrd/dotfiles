@@ -26,7 +26,7 @@ winget install -s winget -e "VideoLAN.VLC"
 
 # Development - General
 winget install -s winget -e "Microsoft.VisualStudioCode"
-winget install -s winget -e "Microsoft.Windows.Terminal"
+winget install -s winget -e "Microsoft.WindowsTerminal"
 winget install -s winget -e "Git.Git"
 winget install -s winget -e "TortoiseGit.TortoiseGit"
 winget install -s winget -e "WinMerge.WinMerge"
