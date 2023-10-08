@@ -64,15 +64,12 @@ Stop-Process -Name WindowsTerminal 2> $null
 Copy-Item -Force -Path "res/windows-terminal-settings.json" -Destination $terminalSettings
 
 # Config - PowerShell
+Set-ExecutionPolicy Bypass
 $pwshProfile = $Profile.CurrentUserAllHosts
 New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
-powershell -Command {
-	$pwshProfile = $Profile.CurrentUserAllHosts
-	New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
-}
 
 <#
-# Suppress errors to workaroudn a problem with PSReadLine
+# Suppress errors to workaround a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
 

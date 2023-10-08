@@ -62,10 +62,11 @@ winget install -s winget -e "Microsoft.PowerShell"
 Reload-Path
 
 git clone "https://github.com/akbyrd/dotfiles.git"
-Set-Location dotfiles
-Set-ExecutionPolicy -Scope Process Bypass
 
+Push-Location dotfiles
+Set-ExecutionPolicy Bypass
 pwsh -Command ./setup.ps1
+Pop-Location
 
 Reload-Path
 $pwshProfile = $Profile.CurrentUserAllHosts
