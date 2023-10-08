@@ -52,8 +52,9 @@ if (!$winget)
 }
 
 winget install -s winget "Git.Git"
+winget install -s winget -e "Microsoft.PowerShell"
 
-# Update path so git can be used
+# Update path so git and pwsh can be used
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 $env:Path = "$machPath;$userPath"
@@ -62,5 +63,4 @@ git clone "https://github.com/akbyrd/dotfiles.git"
 Set-Location dotfiles
 Set-ExecutionPolicy -Scope Process Bypass
 
-winget install -s winget -e "Microsoft.PowerShell"
 pwsh -Command ./setup.ps1

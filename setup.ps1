@@ -13,6 +13,7 @@ $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 # Paint.NET
 # Razer Synapse
 
+<#
 # Standard
 winget install -s winget -e "7zip.7zip"
 winget install -s winget -e "Argotronic.ArgusMonitor"
@@ -44,6 +45,7 @@ $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86
 $machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $env:Path = "$machPath;$userPath;$msBuildDir"
+#>
 
 # Development - Terminal
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
@@ -71,6 +73,7 @@ oh-my-posh disable notice
 
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module PSWinGlue
+<#
 ./fonts.ps1
 foreach ($font in $fonts)
 {
@@ -95,3 +98,4 @@ foreach ($registryScript in $registryScripts)
 {
 	.$registryScript
 }
+#>
