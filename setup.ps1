@@ -91,9 +91,33 @@ Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
 .$pwshProfile
 oh-my-posh disable notice
 
+class Font
+{
+	$name
+	$file
+}
+
+$fonts = [Font[]] (
+	@{
+		name = "Inconsolata"
+		file = "Inconsolata Regular Nerd Font Complete Windows Compatible.ttf"
+	},
+	@{
+		name = "Inconsolata"
+		file = "Inconsolata Bold Nerd Font Complete Windows Compatible.ttf"
+	},
+	@{
+		name = "Inconsolata"
+		file = "Inconsolata Regular Nerd Font Complete Mono Windows Compatible.ttf"
+	},
+	@{
+		name = "Inconsolata"
+		file = "Inconsolata Bold Nerd Font Complete Mono Windows Compatible.ttf"
+	}
+)
+
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module -DisableNameChecking "PSWinGlue"
-.\fonts.ps1
 foreach ($font in $fonts)
 {
 	$baseURL = "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
