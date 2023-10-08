@@ -1,3 +1,9 @@
+# Run this command to bootstrap and run setup
+# iex (iwr "dotfiles.akbyrd.email").Content
+
+# The latest version of this file can be found at
+# https://github.com/akbyrd/dotfiles/blob/main/bootstrap.ps1
+
 # Requirements
 # * Must be run on the same drive as Windows to create hard links
 # * Must be run as admin to symlink terminal settings
@@ -6,13 +12,10 @@
 #
 # It's easier to require admin here rather than setup.ps1 so we don't have to deal with elevation
 # and multiple windows
-Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 $SysEnv = [System.Environment]
 $EnvVar = [System.EnvironmentVariableTarget]
-
-# Download the latest version of this file from
-# https://github.com/akbyrd/dotfiles/blob/main/bootstrap.ps1
 
 # Install winget if it's not already installed
 ($winget = Get-Command -CommandType Application winget) *> $null
@@ -48,13 +51,13 @@ if (!$winget)
 	$progressPreference = 'Continue'
 }
 
-winget install -s winget Git.Git
+winget install -s winget "Git.Git"
 
 # Update path so git can be used
 $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 $env:Path = "$machPath;$userPath"
 
-git clone https://github.com/akbyrd/dotfiles.git
+git clone "https://github.com/akbyrd/dotfiles.git"
 Set-Location dotfiles
 ./setup.ps1
