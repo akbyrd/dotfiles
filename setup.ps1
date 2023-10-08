@@ -9,6 +9,7 @@ $userPath = "$userPath;$dotfilesDir\bin"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # TODO: Fix fonts
+# TODO: Move things into functions
 # TODO: Allow script to be run multiple times
 # TODO: Decide what to do about hard linking
 # TODO: Implement save and restore
@@ -91,43 +92,37 @@ Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
 .$pwshProfile
 oh-my-posh disable notice
 
-class Font
+function Install-Fonts
 {
-	$name
-	$file
-}
+	Install-Module -Repository PSGallery "PSWinGlue"
+	Import-Module -DisableNameChecking "PSWinGlue"
 
-$fonts = [Font[]] (
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Regular Nerd Font Complete Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Bold Nerd Font Complete Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Regular Nerd Font Complete Mono Windows Compatible.ttf"
-	},
-	@{
-		name = "Inconsolata"
-		file = "Inconsolata Bold Nerd Font Complete Mono Windows Compatible.ttf"
+	$tempDir = "fonts"
+	New-Item $tempDir -ItemType Directory -Force | Out-Null
+	Push-Location $tempDir
+	$progressPreference = "silentlyContinue"
+
+	$fontUrl = "https://api.github.com/repos/ryanoasis/nerd-fonts/contents/patched-fonts/Inconsolata"
+	$headers = @{ Accept = "application/vnd.github.raw" }
+	$result = iwr -UseBasicParsing -Headers $headers -Uri $fontUrl
+	$fontFiles = ConvertFrom-JSON $result.Content
+	foreach ($fontFile in $fontFiles)
+	{
+		if ($fontFile.name.EndsWith(".ttf"))
+		{
+			Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
+			Install-Font -Verbose $fontFile.name -Scope User -Method Shell
+			Remove-Item $fontFile.name
+		}
 	}
-)
 
-Install-Module -Repository PSGallery "PSWinGlue"
-Import-Module -DisableNameChecking "PSWinGlue"
-foreach ($font in $fonts)
-{
-	$baseURL = "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
-	$path = "$baseURL/$($font.name)/complete/$($font.file)"
-	$path = $path.replace(" ", "%20")
-	curl -Lo $font.file $path
-	Install-Font -Verbose $font.file -Scope User -Method Shell
-	Remove-Item $font.file
+	$progressPreference = "Continue"
+	Pop-Location
+	Remove-Item $tempDir
+
+	Uninstall-Module PSWinGlue
 }
-Uninstall-Module PSWinGlue
+Install-Fonts
 
 <#
 # Suppress errors to workaround a problem with PSReadLine
