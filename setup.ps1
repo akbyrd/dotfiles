@@ -7,6 +7,11 @@ $dotfilesDir = Split-Path $setupPath
 $userPath = "$userPath;$dotfilesDir\script"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
+# TODO: Remove this
+Get-Host
+winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
+winget install -s winget -e "Microsoft.WindowsTerminal"
+
 # No Packages (23-01-23)
 # MSI Afterburner
 # Nvidia Drivers
@@ -26,15 +31,16 @@ winget install -s winget -e "Valve.Steam"
 winget install -s winget -e "VideoLAN.VLC"
 
 # Development - General
+winget install -s winget -e "Git.Git"
+winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
+winget install -s winget -e "Microsoft.PowerShell"
+winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
 winget install -s winget -e "Microsoft.VisualStudioCode"
 winget install -s winget -e "Microsoft.WindowsTerminal"
-winget install -s winget -e "Git.Git"
 winget install -s winget -e "TortoiseGit.TortoiseGit"
 winget install -s winget -e "WinMerge.WinMerge"
 
-# Development - Visual Studio
-winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
-
+# Config - Visual Studio
 $vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
 $vsInstallDir = (.$vswhere -latest -property installationPath)
 
@@ -47,20 +53,28 @@ $userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $env:Path = "$machPath;$userPath;$msBuildDir"
 #>
 
-# Development - Terminal
+# Update path so oh-my-posh
+$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
+$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+$env:Path = "$machPath;$userPath"
+
+# Config- Terminal
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Stop-Process -Name WindowsTerminal 2> $null
 #New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
 Copy-Item -Force -Path $terminalSettings -Destination "res/windows-terminal-settings.json"
 
-# Development - PowerShell
+# Config - PowerShell
 $pwshProfile = $Profile.CurrentUserAllHosts
-winget install -s winget -e "Microsoft.PowerShell"
 New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
+
+# Unload and reload is a workaround for an error caused by PSReadLine
+# https://github.com/PowerShell/PSReadLine/issues/3359
+Remove-Module PSReadLine
+Import-Module PSReadLine
 Update-Help
 
 # Development - PowerShell Appearance
-winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
 Install-PackageProvider -Name NuGet -Force
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Repository PSGallery "posh-git"
