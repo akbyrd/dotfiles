@@ -62,7 +62,7 @@ $env:Path = "$machPath;$userPath"
 $terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Stop-Process -Name WindowsTerminal 2> $null
 #New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
-Copy-Item -Force -Path $terminalSettings -Destination "res/windows-terminal-settings.json"
+Copy-Item -Force -Path "res/windows-terminal-settings.json" -Destination $terminalSettings
 
 # Config - PowerShell
 $pwshProfile = $Profile.CurrentUserAllHosts
@@ -82,7 +82,7 @@ New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res/oh-my-posh-theme
 .$pwshProfile
 oh-my-posh disable notice
 
-Install-Module -Repository PSGallery "PSWinGlue"
+Install-Module -DisableNameChecking -Repository PSGallery "PSWinGlue"
 Import-Module PSWinGlue
 <#
 ./fonts.ps1
