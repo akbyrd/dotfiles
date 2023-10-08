@@ -71,14 +71,15 @@ Copy-Item -Force -Path "res\windows-terminal-settings.json" -Destination $termin
 # Config - PowerShell
 Set-ExecutionPolicy Bypass
 $pwshProfile = $Profile.CurrentUserAllHosts
+$pwshProfileDir = Split-Path $pwshProfile
 #New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res\pwsh-profile.ps1"
+New-Item -Type Directory $pwshProfileDir
 Copy-Item -Force -Path "res\pwsh-profile.ps1" -Destination $pwshProfile
 
 # Development - PowerShell Appearance
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Repository PSGallery "posh-git"
 Install-Module -Repository PSGallery "Terminal-Icons"
-$pwshProfileDir = Split-Path $pwshProfile
 $ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
 #New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res\oh-my-posh-theme.omp.json"
 Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
