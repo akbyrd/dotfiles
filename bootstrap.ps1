@@ -1,5 +1,7 @@
 # Run this command to bootstrap and run setup
 # iex (iwr "dotfiles.akbyrd.email").Content
+# or
+# iex (iwr -UseBasicParsing "dotfiles.akbyrd.email").Content
 
 # The latest version of this file can be found at
 # https://github.com/akbyrd/dotfiles/blob/main/bootstrap.ps1
@@ -57,8 +59,8 @@ function Reload-Path {
 	$env:Path = "$machPath;$userPath"
 }
 
-winget install -s winget "Git.Git"
-winget install -s winget -e "Microsoft.PowerShell"
+winget install -s winget "Git.Git"; ""
+winget install -s winget -e "Microsoft.PowerShell"; ""
 Reload-Path
 
 git clone "https://github.com/akbyrd/dotfiles.git"

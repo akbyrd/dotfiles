@@ -10,11 +10,10 @@ $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # TODO: Decide what to do about hard linking
 # TODO: Implement save and restore
-# TODO: script is ending up in path twice
 
 # TODO: Remove this
-winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
-winget install -s winget -e "Microsoft.WindowsTerminal"
+winget install -s winget -e "JanDeDobbeleer.OhMyPosh"; ""
+winget install -s winget -e "Microsoft.WindowsTerminal"; ""
 
 # No Packages (23-01-23)
 # MSI Afterburner
@@ -73,7 +72,7 @@ Set-ExecutionPolicy Bypass
 $pwshProfile = $Profile.CurrentUserAllHosts
 $pwshProfileDir = Split-Path $pwshProfile
 #New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res\pwsh-profile.ps1"
-New-Item -Type Directory $pwshProfileDir
+New-Item -Type Directory $pwshProfileDir 2> $null
 Copy-Item -Force -Path "res\pwsh-profile.ps1" -Destination $pwshProfile
 
 # Development - PowerShell Appearance
@@ -87,7 +86,6 @@ Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
 .$pwshProfile
 oh-my-posh disable notice
 
-<#
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module -DisableNameChecking "PSWinGlue"
 .\fonts.ps1
@@ -102,6 +100,7 @@ foreach ($font in $fonts)
 }
 Uninstall-Module PSWinGlue
 
+<#
 # Suppress errors to workaround a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
