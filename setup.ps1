@@ -66,7 +66,12 @@ Copy-Item -Force -Path "res/windows-terminal-settings.json" -Destination $termin
 # Config - PowerShell
 $pwshProfile = $Profile.CurrentUserAllHosts
 New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
+powershell -Command {
+	$pwshProfile = $Profile.CurrentUserAllHosts
+	New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res/pwsh-profile.ps1"
+}
 
+<#
 # Suppress errors to workaroudn a problem with PSReadLine
 # https://github.com/PowerShell/PSReadLine/issues/3359
 Update-Help 2> $null
@@ -83,7 +88,6 @@ oh-my-posh disable notice
 
 Install-Module -Repository PSGallery "PSWinGlue"
 Import-Module -DisableNameChecking "PSWinGlue"
-<#
 ./fonts.ps1
 foreach ($font in $fonts)
 {
