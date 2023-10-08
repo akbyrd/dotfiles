@@ -4,6 +4,7 @@ $EnvVar = [System.EnvironmentVariableTarget]
 # Add script folder to path
 $setupPath = $MyInvocation.MyCommand.Path
 $dotfilesDir = Split-Path $setupPath
+$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $userPath = "$userPath;$dotfilesDir\script"
 $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
