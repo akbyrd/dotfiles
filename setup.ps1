@@ -106,15 +106,24 @@ function Install-Fonts
 	$headers = @{ Accept = "application/vnd.github.raw" }
 	$result = iwr -UseBasicParsing -Headers $headers -Uri $fontUrl
 	$fontFiles = ConvertFrom-JSON $result.Content
-	foreach ($fontFile in $fontFiles)
+foreach ($fontFile in $fontFiles)
+{
+	if ($fontFile.name.EndsWith(".ttf"))
 	{
-		if ($fontFile.name.EndsWith(".ttf"))
-		{
-			Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
-			Install-Font -Verbose $fontFile.name -Scope User -Method Shell
-			Remove-Item $fontFile.name
-		}
+		Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
 	}
+}
+
+Install-Font -Verbose . -Scope User -Method Manual
+
+foreach ($fontFile in $fontFiles)
+{
+	if ($fontFile.name.EndsWith(".ttf"))
+	{
+		Remove-Item $fontFile.name
+	}
+}
+Remove-Item "Install-Font.ps1"
 
 	$progressPreference = "Continue"
 	Pop-Location

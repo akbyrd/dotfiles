@@ -15,12 +15,20 @@ foreach ($fontFile in $fontFiles)
 	if ($fontFile.name.EndsWith(".ttf"))
 	{
 		Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
-		#.\Install-Font.ps1 -Verbose $fontFile.name -Scope User -Method Shell
-		#Remove-Item $fontFile.name
 	}
 }
-#Remove-Item "Install-Font.ps1"
+
+.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
+
+foreach ($fontFile in $fontFiles)
+{
+	if ($fontFile.name.EndsWith(".ttf"))
+	{
+		Remove-Item $fontFile.name
+	}
+}
+Remove-Item "Install-Font.ps1"
 
 $progressPreference = "Continue"
 Pop-Location
-#Remove-Item $tempDir
+Remove-Item $tempDir
