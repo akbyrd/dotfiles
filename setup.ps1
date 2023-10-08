@@ -87,13 +87,13 @@ oh-my-posh disable notice
 
 function Install-Fonts
 {
-	Install-Module -Repository PSGallery "PSWinGlue"
-	Import-Module -DisableNameChecking "PSWinGlue"
-
 	$tempDir = "fonts"
 	New-Item $tempDir -ItemType Directory -Force | Out-Null
 	Push-Location $tempDir
 	$progressPreference = "silentlyContinue"
+
+	$installFontUrl = "https://raw.githubusercontent.com/ralish/PSWinGlue/master/Scripts/Install-Font.ps1"
+	Invoke-WebRequest $installFontUrl -OutFile "Install-Font.ps1"
 
 	$fontUrl = "https://api.github.com/repos/ryanoasis/nerd-fonts/contents/patched-fonts/Inconsolata"
 	$headers = @{ Accept = "application/vnd.github.raw" }
@@ -122,8 +122,6 @@ function Install-Fonts
 	$progressPreference = "Continue"
 	Pop-Location
 	Remove-Item $tempDir
-
-	Uninstall-Module PSWinGlue
 }
 Install-Fonts
 
