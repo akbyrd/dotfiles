@@ -1,10 +1,11 @@
-# Requirements
-# * Must be run on the same drive as Windows to create hard links
-# * Must be run as admin to symlink terminal settings
-# * Must be run as admin to install gpedit
-# * Must be run as admin to set file associations in HKCR
+$SysEnv = [System.Environment]
+$EnvVar = [System.EnvironmentVariableTarget]
 
-#Requires -RunAsAdministrator
+# Add script folder to path
+$setupPath = $MyInvocation.MyCommand.Path
+$dotfilesDir = Split-Path $setupPath
+$userPath = "$userPath;$dotfilesDir\script"
+$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 
 # No Packages (23-01-23)
 # MSI Afterburner
@@ -32,18 +33,21 @@ winget install -s winget -e WinMerge.WinMerge
 
 # Development - Visual Studio
 winget install -s winget -e Microsoft.VisualStudio.2022.Community
-$vsInstallDir = (."${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -property installationPath)
+
+$vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+$vsInstallDir = (.$vswhere -latest -property installationPath)
+
 $msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
 $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
 $msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
 
-$machPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
-$userPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::User)
+$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 $env:Path = "$machPath;$userPath;$msBuildDir"
 
 # Development - Terminal
-$terminalSettings = $env:LOCALAPPDATA + "\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Stop-Process -Name WindowsTerminal
+$terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Stop-Process -Name WindowsTerminal 2> $null
 #New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res/windows-terminal-settings.json
 Copy-Item -Force -Path $terminalSettings -Destination res/windows-terminal-settings.json
 
@@ -55,14 +59,17 @@ Update-Help
 
 # Development - PowerShell Appearance
 winget install -s winget -e JanDeDobbeleer.OhMyPosh
-Install-Module posh-git
-Install-Module Terminal-Icons -Repository PSGallery
-$ompTheme = (Split-Path $pwshProfile) + "\oh-my-posh-theme.omp.json"
+Install-PackageProvider -Name NuGet -Force
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Repository PSGallery posh-git
+Install-Module -Repository PSGallery Terminal-Icons
+$pwshProfileDir = Split-Path $pwshProfile
+$ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
 New-Item -ItemType HardLink -Force -Path $ompTheme -Target res/oh-my-posh-theme.omp.json
 .$pwshProfile
 oh-my-posh disable notice
 
-Install-Module PSWinGlue
+Install-Module -Repository PSGallery PSWinGlue
 Import-Module PSWinGlue
 ./fonts.ps1
 foreach ($font in $fonts)

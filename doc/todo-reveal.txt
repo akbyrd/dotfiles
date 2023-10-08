@@ -1,0 +1,18 @@
+Command                   | B | A |
+
+BaseMoveToCommand         | ? | ? | Single
+TopCommand                | ? | ? | Single
+BottomCommand             | ? | ? | Single
+CancelSelection           | ? | ? | Single
+RemoveSecondaryCursors    | ? | ? | Single
+
+CursorMoveImpl            | - | + | All
+CursorMoveBasedCommand    | ? | ? | All
+HomeCommand               | ? | ? | All
+EndCommand                | ? | ? | All
+LineStartCommand          | ? | ? | All
+LineEndCommand            | ? | ? | All
+ExpandLineSelectionAction | ? | ? | All
+
+WordCommand               | ? | ? | Newest
+LineCommand               | ? | ? | Newest // Doesn't work with multi cursor
