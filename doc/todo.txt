@@ -2,6 +2,7 @@ bookmarks - BUG: Doesn't work in settings.json, keybindings.json
 dotfiles - Add save and apply commands to sync settings
 dotfiles - Load VS settings (and vscode?)
 dotfiles - Set execution policy for Windows Powershell
+git - Add ~/.gitconfig
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd
 psreadline - BUG: SelectLine/SelectBackwardsLine
@@ -59,6 +60,7 @@ vscode - Experiment with copilot
 vscode - Experiment with search editors
 vscode - Experiment with powershell extension
 vscode - Experiment with live share
+vscode - BUG: text mate scopes in markdown fenced code blocks
 vscode - BUG: Can't find files in Dragon/Tools
 vscode - BUG: Autocomplete only happening on first line with multiple cursors
 vscode - BUG: focus is busted in watch window

@@ -37,6 +37,7 @@ winget install -s winget -e "VideoLAN.VLC"
 
 # Development - General
 winget install -s winget -e "Git.Git"
+winget install -s winget -e "Hugo.Hugo.Extended"
 winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
 winget install -s winget -e "Microsoft.PowerShell"
 winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
