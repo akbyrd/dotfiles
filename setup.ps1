@@ -1,16 +1,5 @@
-$SysEnv = [System.Environment]
-$EnvVar = [System.EnvironmentVariableTarget]
-
-# Add bin folder to path
-$setupPath = $MyInvocation.MyCommand.Path
-$dotfilesDir = Split-Path $setupPath
-$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
-$userPath = "$userPath;$dotfilesDir\bin"
-$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
-
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
-# TODO: Move things into functions
 # TODO: Allow script to be run multiple times
 # TODO: Decide what to do about hard linking
 # TODO: Implement save and restore
@@ -18,77 +7,115 @@ $SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 # TODO: Set font for Windows PowerShell terminal
 # TODO: Setup profile for Windows PowerShell
 
-# No Packages (23-01-23)
-# MSI Afterburner
-# Nvidia Drivers
-# Paint.NET
-# Razer Synapse
+function Setup-Software
+{
+	# No Packages (23-01-23)
+	# MSI Afterburner
+	# Nvidia Drivers
+	# Paint.NET
+	# Razer Synapse
 
-# Standard
-winget install -s winget -e "7zip.7zip"
-winget install -s winget -e "Argotronic.ArgusMonitor"
-winget install -s winget -e "Discord.Discord"
-winget install -s winget -e "Mozilla.Firefox"
-winget install -s winget -e "NickeManarin.ScreenToGif"
-winget install -s winget -e "NirSoft.NirCmd"
-winget install -s winget -e "Spotify.Spotify"
-winget install -s winget -e "Valve.Steam"
-winget install -s winget -e "VideoLAN.VLC"
+	# Standard
+	winget install -s winget -e "7zip.7zip"
+	winget install -s winget -e "Argotronic.ArgusMonitor"
+	winget install -s winget -e "Discord.Discord"
+	winget install -s winget -e "Mozilla.Firefox"
+	winget install -s winget -e "NickeManarin.ScreenToGif"
+	winget install -s winget -e "NirSoft.NirCmd"
+	winget install -s winget -e "Spotify.Spotify"
+	winget install -s winget -e "Valve.Steam"
+	winget install -s winget -e "VideoLAN.VLC"
 
-# Development - General
-winget install -s winget -e "Git.Git"
-winget install -s winget -e "Hugo.Hugo.Extended"
-winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
-winget install -s winget -e "Microsoft.PowerShell"
-winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
-winget install -s winget -e "Microsoft.VisualStudioCode"
-winget install -s winget -e "Microsoft.WindowsTerminal"
-winget install -s winget -e "TortoiseGit.TortoiseGit"
-winget install -s winget -e "WinMerge.WinMerge"
+	# Development
+	winget install -s winget -e "Git.Git"
+	winget install -s winget -e "Hugo.Hugo.Extended"
+	winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
+	winget install -s winget -e "Microsoft.PowerShell"
+	winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
+	winget install -s winget -e "Microsoft.VisualStudioCode"
+	winget install -s winget -e "Microsoft.WindowsTerminal"
+	winget install -s winget -e "TortoiseGit.TortoiseGit"
+	winget install -s winget -e "WinMerge.WinMerge"
 
-# Config - Visual Studio
-$vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-$vsInstallDir = (.$vswhere -latest -property installationPath)
+	# PowerShell
+	# TODO: Is this still needed?
+	#Set-ExecutionPolicy Bypass
+	Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+	Install-Module -Repository PSGallery "posh-git"
+	Install-Module -Repository PSGallery "Terminal-Icons"
+}
 
-$msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
-$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
-$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
+function Setup-Path
+{
+	$SysEnv = [System.Environment]
+	$EnvVar = [System.EnvironmentVariableTarget]
 
-$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
-$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
-$env:Path = "$machPath;$userPath;$msBuildDir"
+	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 
-# Update path so oh-my-posh can be configured
-$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
-$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
-$env:Path = "$machPath;$userPath"
+	# Bin
+	$dotfilesDir = Split-Path $MyInvocation.MyCommand.Path
+	$userPath = "$userPath;$dotfilesDir\bin"
 
-# Config- Terminal
-$terminalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Stop-Process -Name WindowsTerminal 2> $null
-#New-Item -ItemType HardLink -Force -Path $terminalSettings -Target res\windows-terminal-settings.json
-Copy-Item -Force -Path "res\windows-terminal-settings.json" -Destination $terminalSettings
+	# MSBuild
+	$vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+	$vsInstallDir = (.$vswhere -latest -property installationPath)
 
-# Config - PowerShell
-Set-ExecutionPolicy Bypass
-$pwshProfile = $Profile.CurrentUserAllHosts
-$pwshProfileDir = Split-Path $pwshProfile
-#New-Item -ItemType HardLink -Force -Path $pwshProfile -Target "res\pwsh-profile.ps1"
-New-Item -Type Directory $pwshProfileDir 2> $null
-Copy-Item -Force -Path "res\pwsh-profile.ps1" -Destination $pwshProfile
+	$msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
+	$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
+	$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
+	$userPath = "$userPath;$msBuildDir"
 
-# Development - PowerShell Appearance
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Module -Repository PSGallery "posh-git"
-Install-Module -Repository PSGallery "Terminal-Icons"
-$ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
-#New-Item -ItemType HardLink -Force -Path $ompTheme -Target "res\oh-my-posh-theme.omp.json"
-Copy-Item -Force -Path "res\oh-my-posh-theme.omp.json" -Destination $ompTheme
+	$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
+	$env:Path = "$machPath;$userPath"
+}
 
-.$pwshProfile
-oh-my-posh disable notice
+function Backup-Config
+{
 
-function Install-Fonts
+}
+
+function Restore-Config
+{
+	# Git
+	$gitSrc = "res\.gitconfig"
+	$gitDst = "~\.gitconfig"
+	#New-Item -ItemType HardLink -Force -Path "~\.gitconfig" -Target "res\.gitconfig"
+	Copy-Item -Force -Path $gitSrc -Destination $gitDst
+
+	# Terminal
+	$termSrc = "res\windows-terminal-settings.json"
+	$termDst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+	Stop-Process -Name WindowsTerminal 2> $null
+	#New-Item -ItemType HardLink -Force -Path $termDst -Target $termSrc
+	Copy-Item -Force -Path $termSrc -Destination $termDst
+
+	$pwshProfile = $Profile.CurrentUserAllHosts
+	$pwshProfileDir = Split-Path $pwshProfile
+
+	# PowerShell
+	$pwshSrc = "res\pwsh-profile.ps1"
+	$pwshDst = $pwshProfile
+	New-Item -Type Directory $pwshProfileDir 2> $null
+	#New-Item -ItemType HardLink -Force -Path $pwshDst -Target $pwshSrc
+	Copy-Item -Force -Path $pwshSrc -Destination $pwshDst
+	.$pwshProfile
+
+	# OhMyPosh
+	$ompSrc = "res\oh-my-posh-theme.omp.json"
+	$ompDst = "$pwshProfileDir\oh-my-posh-theme.omp.json"
+	#New-Item -ItemType HardLink -Force -Path $ompDst -Target $ompSrc
+	Copy-Item -Force -Path $ompSrc -Destination $ompDst
+	# TODO: Can this be done in a config file?
+	oh-my-posh disable notice
+}
+
+function Setup-Config
+{
+	Restore-Config
+}
+
+function Setup-Fonts
 {
 	$tempDir = "fonts"
 	New-Item $tempDir -ItemType Directory -Force | Out-Null
@@ -108,7 +135,7 @@ function Install-Fonts
 		{
 			Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
 
-			# Workaround for the fact taht Install-Font ends up holding a file lock until PowerShell is closed.
+			# Workaround for the fact that Install-Font ends up holding a file lock until PowerShell is closed.
 			# This only happens with the Manual method, but the Shell method doesn't work in Windows Sandbox so
 			# we can't avoid it.
 			# https://github.com/ralish/PSWinGlue/issues/9
@@ -126,21 +153,33 @@ function Install-Fonts
 	Pop-Location
 	Remove-Item $tempDir
 }
-Install-Fonts
 
-# Suppress errors to workaround a problem with PSReadLine
-# https://github.com/PowerShell/PSReadLine/issues/3359
-Update-Help 2> $null
-
-.\"res\windows\registry-utilities.ps1"
-$registryFiles = Get-ChildItem "res\windows\*.reg"
-foreach ($registryFile in $registryFiles)
+function Setup-Help
 {
-	regedit /s $registryFile
+	# Suppress errors to workaround a problem with PSReadLine
+	# https://github.com/PowerShell/PSReadLine/issues/3359
+	Update-Help 2> $null
 }
 
-$registryScripts = Get-ChildItem "res\windows\*.ps1" -Exclude "registry-utilities.ps1"
-foreach ($registryScript in $registryScripts)
+function Setup-Registry
 {
-	.$registryScript
+	.\"res\windows\registry-utilities.ps1"
+	$registryFiles = Get-ChildItem "res\windows\*.reg"
+	foreach ($registryFile in $registryFiles)
+	{
+		regedit /s $registryFile
+	}
+
+	$registryScripts = Get-ChildItem "res\windows\*.ps1" -Exclude "registry-utilities.ps1"
+	foreach ($registryScript in $registryScripts)
+	{
+		.$registryScript
+	}
 }
+
+Setup-Software
+Setup-Path
+Setup-Config
+Setup-Fonts
+Setup-Help
+Setup-Registry

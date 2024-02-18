@@ -1,0 +1,32 @@
+[commit]
+	verbose = true
+[core]
+	editor = \"$LOCALAPPDATA\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+[diff]
+	algorithm = histogram
+	tool = winmerge
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
+[fetch]
+	prune = true
+[init]
+	defaultBranch = main
+[merge]
+	conflictstyle = zdiff3
+	tool = winmerge
+	keepbackup = false
+[pull]
+	ff = only
+[push]
+	followtags = true
+[rebase]
+	autostash = true
+[rerere]
+	enabled = true
+[status]
+	submoduleSummary = true
+[submodule]
+	recurse = true
+[user]
+	name = Adam Byrd
+	email = akbyrd@pm.me

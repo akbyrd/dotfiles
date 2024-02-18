@@ -6,19 +6,22 @@ $ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
 $env:POSH_GIT_ENABLED = $true
 #Import-Module Terminal-Icons
 
-function Inject-Command([String] $command) {
+function Inject-Command([String] $command)
+{
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
 	[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 
-function Revert-LineAndPrediction {
+function Revert-LineAndPrediction
+{
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 	[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
 }
 
-function Reload-Path {
+function Reload-Path
+{
 	$SysEnv = [System.Environment]
 	$EnvVar = [System.EnvironmentVariableTarget]
 

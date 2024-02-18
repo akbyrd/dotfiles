@@ -16,7 +16,8 @@
 # and multiple windows
 #Requires -RunAsAdministrator
 
-function Install-WinGet {
+function Install-WinGet
+{
 	# Using github instead of the store since it's not guaranteed to be installed (Windows Sandbox,
 	# corporate environments, etc).
 	# https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
@@ -47,7 +48,8 @@ function Install-WinGet {
 	$progressPreference = "Continue"
 }
 
-function Reload-Path {
+function Reload-Path
+{
 	$SysEnv = [System.Environment]
 	$EnvVar = [System.EnvironmentVariableTarget]
 
@@ -58,7 +60,8 @@ function Reload-Path {
 
 # Install winget if it's not already installed
 ($winget = Get-Command -CommandType Application winget) *> $null
-if (!$winget) {
+if (!$winget)
+{
 	Install-WinGet
 }
 
