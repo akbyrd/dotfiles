@@ -72,6 +72,6 @@ Reload-Path
 git clone "https://github.com/akbyrd/dotfiles.git"
 Push-Location "dotfiles"
 Set-ExecutionPolicy Bypass
-pwsh -Command { .\"setup.ps1" }
+pwsh -Command { &"setup.ps1" }
 Pop-Location
 Reload-Path

@@ -1,6 +1,5 @@
 $pwshProfile = $Profile.CurrentUserAllHosts
-$pwshProfileDir = Split-Path $pwshProfile
-$ompTheme = "$pwshProfileDir\oh-my-posh-theme.omp.json"
+$ompTheme = "$(Split-Path $pwshProfile)\oh-my-posh-theme.omp.json"
 
 ((& oh-my-posh init pwsh --config $ompTheme --print) -join "`n") | Invoke-Expression
 $env:POSH_GIT_ENABLED = $true
@@ -30,6 +29,8 @@ function Reload-Path
 	$env:Path = "$machPath;$userPath"
 }
 
+function Backup-Config { &"$env:DotfilesDir\setup.ps1" Backup }
+function Restore-Config { &"$env:DotfilesDir\setup.ps1" Restore }
 function Edit-Profile { code $pwshProfile }
 function Reload-Profile { .$pwshProfile }
 function Edit-Theme { code $ompTheme }
@@ -49,10 +50,10 @@ Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+?" -Description "Edit-Theme"     -Sc
 # Tab auto-completion for winget
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 	param($wordToComplete, $commandAst, $cursorPosition)
-		[Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
-		$local:word = $wordToComplete.Replace('"', '""')
-		$local:ast = $commandAst.ToString().Replace('"', '""')
-		winget complete --word="$local:word" --commandline "$local:ast" --position $cursorPosition | ForEach-Object {
-			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-		}
+	[Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
+	$local:word = $wordToComplete.Replace('"', '""')
+	$local:ast = $commandAst.ToString().Replace('"', '""')
+	winget complete --word="$local:word" --commandline "$local:ast" --position $cursorPosition | ForEach-Object {
+		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+	}
 }

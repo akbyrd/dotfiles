@@ -1,11 +1,70 @@
+# TODO: Rename scripts (keep default name, use separate folders)
+# TODO: Remove the workaround for font file locks
+# TODO: Decide what to do about hard linking
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
-# TODO: Allow script to be run multiple times
-# TODO: Decide what to do about hard linking
-# TODO: Implement save and restore
-# TODO: Set font for PowerShell terminal
-# TODO: Set font for Windows PowerShell terminal
-# TODO: Setup profile for Windows PowerShell
+
+param (
+	[string] $Task = "Setup")
+
+class Config
+{
+	[string] $src
+	[string] $dst
+	[scriptblock] $pre
+	[scriptblock] $post
+}
+
+$configs = [Config[]] (
+	@{ # Git
+		src = "res\.gitconfig"
+		dst = "~\.gitconfig"
+	},
+	@{ # Windows Terminal
+		src = "res\windows-terminal-settings.json"
+		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+		pre = { Stop-Process -Name WindowsTerminal 2> $null }
+	},
+	@{ # PowerShell
+		src  = "res\pwsh-profile.ps1"
+		dst  = $Profile.CurrentUserAllHosts
+		post = { .$Profile.CurrentUserAllHosts }
+	},
+	@{ # Oh My Posh
+		src = "res\oh-my-posh-theme.omp.json"
+		dst = "$(Split-Path $Profile.CurrentUserAllHosts)\oh-my-posh-theme.omp.json"
+	}
+)
+
+function Backup-Config
+{
+	foreach ($config in $configs)
+	{
+		Copy-Item -Force -Path $config.dst -Destination $config.src
+	}
+}
+
+function Restore-Config
+{
+	foreach ($config in $configs)
+	{
+		if ($config.pre)
+		{
+			&$config.pre
+		}
+
+		$dir = Split-Path $config.dst
+		New-Item -Type Directory $dir 2> $null
+
+		#New-Item -ItemType HardLink -Force -Path $config.dst -Target $config.src
+		Copy-Item -Force -Path $config.src -Destination $config.dst
+
+		if ($config.post)
+		{
+			&$config.post
+		}
+	}
+}
 
 function Setup-Software
 {
@@ -43,9 +102,13 @@ function Setup-Software
 	Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 	Install-Module -Repository PSGallery "posh-git"
 	Install-Module -Repository PSGallery "Terminal-Icons"
+
+	# TODO: Can this be done in a config file?
+	# TODO: Load Oh My Posh before running this
+	#oh-my-posh disable notice
 }
 
-function Setup-Path
+function Setup-Environment
 {
 	$SysEnv = [System.Environment]
 	$EnvVar = [System.EnvironmentVariableTarget]
@@ -53,8 +116,11 @@ function Setup-Path
 	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
 	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 
-	# Bin
+	# Dotfiles
 	$dotfilesDir = Split-Path $MyInvocation.MyCommand.Path
+	$SysEnv::SetEnvironmentVariable("DotfilesDir", $dotfilesDir, $EnvVar::User)
+
+	# Bin
 	$userPath = "$userPath;$dotfilesDir\bin"
 
 	# MSBuild
@@ -66,48 +132,9 @@ function Setup-Path
 	$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
 	$userPath = "$userPath;$msBuildDir"
 
+	# Apply changes
 	$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 	$env:Path = "$machPath;$userPath"
-}
-
-function Backup-Config
-{
-
-}
-
-function Restore-Config
-{
-	# Git
-	$gitSrc = "res\.gitconfig"
-	$gitDst = "~\.gitconfig"
-	#New-Item -ItemType HardLink -Force -Path "~\.gitconfig" -Target "res\.gitconfig"
-	Copy-Item -Force -Path $gitSrc -Destination $gitDst
-
-	# Terminal
-	$termSrc = "res\windows-terminal-settings.json"
-	$termDst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-	Stop-Process -Name WindowsTerminal 2> $null
-	#New-Item -ItemType HardLink -Force -Path $termDst -Target $termSrc
-	Copy-Item -Force -Path $termSrc -Destination $termDst
-
-	$pwshProfile = $Profile.CurrentUserAllHosts
-	$pwshProfileDir = Split-Path $pwshProfile
-
-	# PowerShell
-	$pwshSrc = "res\pwsh-profile.ps1"
-	$pwshDst = $pwshProfile
-	New-Item -Type Directory $pwshProfileDir 2> $null
-	#New-Item -ItemType HardLink -Force -Path $pwshDst -Target $pwshSrc
-	Copy-Item -Force -Path $pwshSrc -Destination $pwshDst
-	.$pwshProfile
-
-	# OhMyPosh
-	$ompSrc = "res\oh-my-posh-theme.omp.json"
-	$ompDst = "$pwshProfileDir\oh-my-posh-theme.omp.json"
-	#New-Item -ItemType HardLink -Force -Path $ompDst -Target $ompSrc
-	Copy-Item -Force -Path $ompSrc -Destination $ompDst
-	# TODO: Can this be done in a config file?
-	oh-my-posh disable notice
 }
 
 function Setup-Config
@@ -140,7 +167,7 @@ function Setup-Fonts
 			# we can't avoid it.
 			# https://github.com/ralish/PSWinGlue/issues/9
 			pwsh -Command {
-				.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
+				Install-Font.ps1 -Verbose . -Scope User -Method Manual
 			}
 
 			Remove-Item $fontFile.name
@@ -163,7 +190,7 @@ function Setup-Help
 
 function Setup-Registry
 {
-	.\"res\windows\registry-utilities.ps1"
+	&"res\windows\registry-utilities.ps1"
 	$registryFiles = Get-ChildItem "res\windows\*.reg"
 	foreach ($registryFile in $registryFiles)
 	{
@@ -177,9 +204,17 @@ function Setup-Registry
 	}
 }
 
-Setup-Software
-Setup-Path
-Setup-Config
-Setup-Fonts
-Setup-Help
-Setup-Registry
+switch ($Task)
+{
+	"Backup" { Backup-Config }
+	"Restore" { Restore-Config }
+	"Setup"
+	{
+		Setup-Software
+		Setup-Environment
+		Setup-Config
+		Setup-Fonts
+		Setup-Help
+		Setup-Registry
+	}
+}
