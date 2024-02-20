@@ -1,5 +1,5 @@
 $pwshProfile = $Profile.CurrentUserAllHosts
-$ompTheme = "$(Split-Path $pwshProfile)\oh-my-posh-theme.omp.json"
+$ompTheme = "$(Split-Path $pwshProfile)\theme.omp.json"
 
 ((& oh-my-posh init pwsh --config $ompTheme --print) -join "`n") | Invoke-Expression
 $env:POSH_GIT_ENABLED = $true

@@ -84,7 +84,7 @@
 					"foreground": "#19191b",
 					"background": "#00897b",
 					"background_templates": ["{{ if gt .Code 0 }}#e91e63{{ end }}"],
-					"trailing_diamond": "\uE0B4",
+					"trailing_diamond": "\ue0b4",
 					"properties": {
 						"always_enabled": true
 					}

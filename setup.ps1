@@ -1,11 +1,9 @@
-# TODO: Rename scripts (keep default name, use separate folders)
 # TODO: Remove the workaround for font file locks
 # TODO: Decide what to do about hard linking
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
 
-param (
-	[string] $Task = "Setup")
+param ([string] $Task = "Setup")
 
 class Config
 {
@@ -18,21 +16,21 @@ class Config
 $configs = [Config[]] (
 	@{ # Git
 		src = "res\.gitconfig"
-		dst = "~\.gitconfig"
+		dst = "~"
 	},
 	@{ # Windows Terminal
-		src = "res\windows-terminal-settings.json"
-		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+		src = "res\windows-terminal\settings.json"
+		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
 		pre = { Stop-Process -Name WindowsTerminal 2> $null }
 	},
 	@{ # PowerShell
-		src  = "res\pwsh-profile.ps1"
+		src  = "res\pwsh\profile.ps1"
 		dst  = $Profile.CurrentUserAllHosts
 		post = { .$Profile.CurrentUserAllHosts }
 	},
 	@{ # Oh My Posh
-		src = "res\oh-my-posh-theme.omp.json"
-		dst = "$(Split-Path $Profile.CurrentUserAllHosts)\oh-my-posh-theme.omp.json"
+		src = "res\pwsh\theme.omp.json"
+		dst = Split-Path $Profile.CurrentUserAllHosts
 	}
 )
 
@@ -40,7 +38,15 @@ function Backup-Config
 {
 	foreach ($config in $configs)
 	{
-		Copy-Item -Force -Path $config.dst -Destination $config.src
+		$src = $config.dst
+		$dst = $config.src
+
+		if (!(Test-Path -PathType Leaf $config.dst))
+		{
+			$src += "\$(Split-Path -Leaf $config.src)"
+		}
+
+		Copy-Item -Force -Path $src -Destination $dst
 	}
 }
 
@@ -53,8 +59,19 @@ function Restore-Config
 			&$config.pre
 		}
 
-		$dir = Split-Path $config.dst
-		New-Item -Type Directory $dir 2> $null
+		$dir = $config.dst
+		if (Test-Path -PathType Leaf -Path $dir)
+		{
+			$dir = Split-Path $config.dst
+
+			$srcName = Split-Path -Leaf $config.src
+			$dstName = Split-Path -Leaf $config.dst
+			if ($srcName -ne $dstName)
+			{
+				Write-Error "Source ($srcName) and destination ($dstName) config file names do not match"
+			}
+		}
+		New-Item -Type Directory -Path $dir 2> $null
 
 		#New-Item -ItemType HardLink -Force -Path $config.dst -Target $config.src
 		Copy-Item -Force -Path $config.src -Destination $config.dst
