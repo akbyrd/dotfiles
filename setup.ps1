@@ -1,3 +1,4 @@
+# TODO: If Restore-Config is running inside windows terminal open the powershell terminal
 # TODO: Decide what to do about hard linking
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
@@ -38,11 +39,12 @@ function Backup-Config
 	foreach ($config in $configs)
 	{
 		$src = $config.dst
-		$dst = $config.src
+		$dst = "$env:DotfilesDir\$($config.src)"
 
-		if (!(Test-Path -PathType Leaf $config.dst))
+		# If src is a folder grab the file name from dst
+		if (!(Test-Path -PathType Leaf $src))
 		{
-			$src += "\$(Split-Path -Leaf $config.src)"
+			$src += "\$(Split-Path -Leaf $dst)"
 		}
 
 		Copy-Item -Force -Path $src -Destination $dst
@@ -53,18 +55,21 @@ function Restore-Config
 {
 	foreach ($config in $configs)
 	{
+		$src = "$env:DotfilesDir\$($config.src)"
+		$dst = $config.dst
+
 		if ($config.pre)
 		{
 			&$config.pre
 		}
 
-		$dir = $config.dst
+		$dir = $dst
 		if (Test-Path -PathType Leaf -Path $dir)
 		{
-			$dir = Split-Path $config.dst
+			$dir = Split-Path $dst
 
-			$srcName = Split-Path -Leaf $config.src
-			$dstName = Split-Path -Leaf $config.dst
+			$srcName = Split-Path -Leaf $src
+			$dstName = Split-Path -Leaf $dst
 			if ($srcName -ne $dstName)
 			{
 				Write-Error "Source ($srcName) and destination ($dstName) config file names do not match"
@@ -73,7 +78,7 @@ function Restore-Config
 		New-Item -Type Directory -Path $dir 2> $null
 
 		#New-Item -ItemType HardLink -Force -Path $config.dst -Target $config.src
-		Copy-Item -Force -Path $config.src -Destination $config.dst
+		Copy-Item -Force -Path $src -Destination $dst
 
 		if ($config.post)
 		{

@@ -4,6 +4,15 @@
     "actions": 
     [
         {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
+        },
+        {
             "command": "find",
             "keys": "ctrl+shift+f"
         },
@@ -13,34 +22,6 @@
                 "action": "prevTab"
             },
             "keys": "alt+left"
-        },
-        {
-            "command": 
-            {
-                "action": "copy",
-                "singleLine": false
-            },
-            "keys": "ctrl+c"
-        },
-        {
-            "command": 
-            {
-                "action": "openSettings",
-                "target": "settingsFile"
-            },
-            "keys": "ctrl+alt+comma"
-        },
-        {
-            "command": "paste"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "alt+shift+d"
         },
         {
             "command": "unbound",
@@ -101,6 +82,29 @@
         {
             "command": 
             {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
+        },
+        {
+            "command": 
+            {
+                "action": "openSettings",
+                "target": "settingsFile"
+            },
+            "keys": "ctrl+alt+comma"
+        },
+        {
+            "command": "paste"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+p"
+        },
+        {
+            "command": 
+            {
                 "action": "newTab"
             },
             "keys": "ctrl+n"
@@ -115,18 +119,22 @@
         {
             "command": 
             {
-                "action": "openSettings",
-                "target": "defaultsFile"
+                "action": "moveFocus",
+                "direction": "down"
             },
-            "keys": "ctrl+alt+period"
+            "keys": "ctrl+alt+down"
         },
         {
             "command": "closePane",
             "keys": "ctrl+w"
         },
         {
-            "command": "openNewTabDropdown",
-            "keys": "ctrl+p"
+            "command": 
+            {
+                "action": "openSettings",
+                "target": "defaultsFile"
+            },
+            "keys": "ctrl+alt+period"
         },
         {
             "command": 
@@ -146,14 +154,6 @@
         {
             "command": "closeWindow",
             "keys": "ctrl+shift+w"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "down"
-            },
-            "keys": "ctrl+alt+down"
         },
         {
             "command": 
@@ -192,6 +192,12 @@
     "initialCols": 140,
     "launchMode": "default",
     "multiLinePasteWarning": false,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
@@ -199,7 +205,7 @@
             "colorScheme": "Campbell",
             "font": 
             {
-                "face": "Inconsolata NF",
+                "face": "Inconsolata Nerd Font",
                 "size": 10.0
             },
             "opacity": 80,
@@ -427,6 +433,29 @@
             "selectionBackground": "#FFFFFF",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
+        },
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-22.04-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
         },
         {
             "background": "#300A24",
