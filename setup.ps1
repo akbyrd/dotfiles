@@ -1,4 +1,3 @@
-# TODO: Remove the workaround for font file locks
 # TODO: Decide what to do about hard linking
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
@@ -134,7 +133,7 @@ function Setup-Environment
 	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
 
 	# Dotfiles
-	$dotfilesDir = Split-Path $MyInvocation.MyCommand.Path
+	$dotfilesDir = Split-Path $MyInvocation.ScriptName
 	$SysEnv::SetEnvironmentVariable("DotfilesDir", $dotfilesDir, $EnvVar::User)
 
 	# Bin
@@ -145,8 +144,6 @@ function Setup-Environment
 	$vsInstallDir = (.$vswhere -latest -property installationPath)
 
 	$msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
-	$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles}", "%ProgramFiles%")
-	$msBuildDir = $msBuildDir.Replace("${env:ProgramFiles(x86)}", "%ProgramFiles(x86)%")
 	$userPath = "$userPath;$msBuildDir"
 
 	# Apply changes
@@ -175,18 +172,12 @@ function Setup-Fonts
 	$fontFiles = ConvertFrom-JSON $result.Content
 	foreach ($fontFile in $fontFiles)
 	{
-		if ($fontFile.name.EndsWith(".ttf"))
+		$isFont = $fontFile.name.EndsWith(".ttf")
+		$isVariant = $fontFile.name -match "Mono-|Propo-"
+		if ($isFont -and !$isVariant)
 		{
 			Invoke-WebRequest -Uri $fontFile.download_url -OutFile $fontFile.name
-
-			# Workaround for the fact that Install-Font ends up holding a file lock until PowerShell is closed.
-			# This only happens with the Manual method, but the Shell method doesn't work in Windows Sandbox so
-			# we can't avoid it.
-			# https://github.com/ralish/PSWinGlue/issues/9
-			pwsh -Command {
-				Install-Font.ps1 -Verbose . -Scope User -Method Manual
-			}
-
+			.\Install-Font.ps1 -Verbose . -Scope User -Method Manual
 			Remove-Item $fontFile.name
 		}
 	}
