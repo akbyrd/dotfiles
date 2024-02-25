@@ -18,6 +18,7 @@ setup - Copy Argus profile
 setup - bootstrap - install pwsh, then run the rest of setup there
 vscode - Contribution - https://github.com/microsoft/vscode/issues/180472 - move line multiple cursor support
 vscode - Contribution - https://github.com/microsoft/vscode/issues/180473 - move line inconsistency
+vscode - Contribution - Fix vscode markdown support to not include trailing newlines
 vscode - Contribution - moveEditorToNextGroup/moveEditorToPreviousGroup difference
 vscode - Contribution - copy paste with multiple cursor has different behavior
 vscode - Contribution - https://github.com/microsoft/vscode/issues/174162 - don't pin tabs with moveEditorLeftInGroup
