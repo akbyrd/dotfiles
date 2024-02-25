@@ -57,3 +57,8 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
 	}
 }
+
+# Tab auto-completion for hugo
+if ((Test-Path "hugo.toml") -or (Test-Path "config/_default/hugo.toml")) {
+	hugo completion powershell | Out-String | Invoke-Expression
+}
