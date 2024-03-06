@@ -26,7 +26,7 @@ function Install-WinGet
 	# https://github.com/microsoft/winget-cli/issues/401
 	$wingetUrls = @(
 		"https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx",
-		"https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx",
+		"https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx",
 		"https://aka.ms/getwinget"
 	)
 
