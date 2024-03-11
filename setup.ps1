@@ -1,9 +1,12 @@
+# TODO: Tab completion when -Task is implicit
 # TODO: If Restore-Config is running inside windows terminal open the powershell terminal
 # TODO: Decide what to do about hard linking
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
 
-param ([string] $Task = "Setup")
+param (
+	[ValidateSet("Backup", "Restore", "Setup")]
+	[string] $Task = "Setup")
 
 class Config
 {
