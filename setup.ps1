@@ -92,33 +92,43 @@ function Restore-Config
 
 function Setup-Software
 {
-	# No Packages (23-01-23)
-	# MSI Afterburner
+	# No Packages (24-10-12)
 	# Nvidia Drivers
-	# Paint.NET
-	# Razer Synapse
+	# Razer Synapse 4
+	# OBSBOT
 
-	# Standard
+	# Common
 	winget install -s winget -e "7zip.7zip"
-	winget install -s winget -e "Argotronic.ArgusMonitor"
-	winget install -s winget -e "Discord.Discord"
-	winget install -s winget -e "Mozilla.Firefox"
-	winget install -s winget -e "NickeManarin.ScreenToGif"
-	winget install -s winget -e "NirSoft.NirCmd"
-	winget install -s winget -e "Spotify.Spotify"
-	winget install -s winget -e "Valve.Steam"
-	winget install -s winget -e "VideoLAN.VLC"
-
-	# Development
+	winget install -s winget -e "dotPDN.PaintDotNet"
 	winget install -s winget -e "Git.Git"
-	winget install -s winget -e "Hugo.Hugo.Extended"
 	winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
 	winget install -s winget -e "Microsoft.PowerShell"
-	winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
 	winget install -s winget -e "Microsoft.VisualStudioCode"
 	winget install -s winget -e "Microsoft.WindowsTerminal"
+	winget install -s winget -e "NickeManarin.ScreenToGif"
+	winget install -s winget -e "Spotify.Spotify"
 	winget install -s winget -e "TortoiseGit.TortoiseGit"
 	winget install -s winget -e "WinMerge.WinMerge"
+
+	if ($work)
+	{
+		# Work
+		winget install -s winget -e "Microsoft.VisualStudio.2022.Enterprise"
+		winget install -s winget -e "Perforce.P4V"
+	}
+	else
+	{
+		# Personal
+		winget install -s winget -e "Argotronic.ArgusMonitor"
+		winget install -s winget -e "Discord.Discord"
+		winget install -s winget -e "Mozilla.Firefox"
+		winget install -s winget -e "Guru3D.Afterburner"
+		winget install -s winget -e "NirSoft.NirCmd"
+		winget install -s winget -e "Valve.Steam"
+		winget install -s winget -e "VideoLAN.VLC"
+		winget install -s winget -e "Hugo.Hugo.Extended"
+		winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
+	}
 
 	# PowerShell
 	# TODO: Is this still needed?
@@ -130,6 +140,7 @@ function Setup-Software
 	# TODO: Can this be done in a config file?
 	# TODO: Load Oh My Posh before running this
 	#oh-my-posh disable notice
+	#oh-my-posh enable autoupgrade
 }
 
 function Setup-Environment
