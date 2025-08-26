@@ -2,6 +2,7 @@ bookmarks - BUG: Doesn't work in settings.json, keybindings.json
 dotfiles - Add save and apply commands to sync settings
 dotfiles - Load VS settings (and vscode?)
 dotfiles - Set execution policy for Windows Powershell
+font - vendor font files
 git - Add ~/.gitconfig
 psreadline - BUG: DeleteWord vs DeleteEndOfWord
 psreadline - BUG: NextWordEnd

@@ -96,7 +96,7 @@
 					"invert_powerline": true,
 					"foreground": "#19191b",
 					"background": "#e4e4e4",
-					"template": " \uf608 {{ .FormattedMs }} ",
+					"template": " \udb80\udd09 {{ .FormattedMs }} ",
 					"properties": {
 						"always_enabled": true,
 						"style": "austin"
@@ -109,7 +109,7 @@
 					"foreground": "#19191b",
 					"background": "#d75f00",
 					"trailing_diamond": "\ue0b0",
-					"template": " \uf5ef {{ .CurrentDate | date .Format }} ",
+					"template": " \udb80\udcf0 {{ .CurrentDate | date .Format }} ",
 					"properties": {
 						"time_format": "15:04:05"
 					}
