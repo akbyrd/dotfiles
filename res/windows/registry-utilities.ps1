@@ -22,4 +22,8 @@ function global:Set-RegistryValue(
 	}
 }
 
-New-PSDrive -Scope Global -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Out-Null
+if (!(Test-Path "HKCR:"))
+{
+	# NOTE: HKCU already exists
+	New-PSDrive -Scope Global -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Out-Null
+}
