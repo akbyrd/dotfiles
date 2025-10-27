@@ -4,9 +4,42 @@
 # TODO: Fix dism in Windows Sandbox
 # TODO: Fix registry-utilities in Windows Sandbox
 
+<#
+.SYNOPSIS
+	Performs various setup tasks for new computers. Installs software, fonts, and config
+	files and adjusts registry settings. Also able to backup and restore config files.
+
+.PARAMETER Task
+	The task to perform. Valid values: Setup, Backup, Restore.
+
+.PARAMETER Environment
+	The target environment. Valid values: Home, Work.
+
+.EXAMPLE
+	.\setup.ps1
+	Runs the Setup task for the Home environment
+
+.EXAMPLE
+	.\setup.ps1 Setup Home
+	Runs the Setup task for the Home environment
+
+.EXAMPLE
+	.\setup.ps1 Backup
+	Runs the Backup task for the Home environment
+
+.EXAMPLE
+	.\setup.ps1 Restore
+	Runs the Restore task for the Home environment
+#>
+
 param (
 	[ValidateSet("Backup", "Restore", "Setup")]
-	[string] $Task = "Setup")
+	[string] $Task = "Setup",
+
+	[Alias("Environment")]
+	[ValidateSet("Home", "Work")]
+	[string] $Env = "Home"
+)
 
 class Config
 {
@@ -16,6 +49,7 @@ class Config
 	[scriptblock] $post
 }
 
+# NOTE: dst must be a directory
 $configs = [Config[]] (
 	@{ # Git
 		src = "res\.gitconfig"
@@ -24,11 +58,11 @@ $configs = [Config[]] (
 	@{ # Windows Terminal
 		src = "res\windows-terminal\settings.json"
 		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-		pre = { Stop-Process -Name WindowsTerminal 2> $null }
+		pre = { Stop-Process -Name WindowsTerminal 2> Out-Null }
 	},
 	@{ # PowerShell
 		src  = "res\pwsh\profile.ps1"
-		dst  = $Profile.CurrentUserAllHosts
+		dst = Split-Path $Profile.CurrentUserAllHosts
 		post = { .$Profile.CurrentUserAllHosts }
 	},
 	@{ # Oh My Posh
@@ -41,6 +75,8 @@ function Backup-Config
 {
 	foreach ($config in $configs)
 	{
+		Write-Host "`nBacking up config '$($config.src)'"
+
 		$src = $config.dst
 		$dst = "$env:DotfilesDir\$($config.src)"
 
@@ -58,6 +94,8 @@ function Restore-Config
 {
 	foreach ($config in $configs)
 	{
+		Write-Host "`nRestoring config '$($config.src)'"
+
 		$src = "$env:DotfilesDir\$($config.src)"
 		$dst = $config.dst
 
@@ -66,19 +104,10 @@ function Restore-Config
 			&$config.pre
 		}
 
-		$dir = $dst
-		if (Test-Path -PathType Leaf -Path $dir)
-		{
-			$dir = Split-Path $dst
-
-			$srcName = Split-Path -Leaf $src
-			$dstName = Split-Path -Leaf $dst
-			if ($srcName -ne $dstName)
-			{
-				Write-Error "Source ($srcName) and destination ($dstName) config file names do not match"
-			}
-		}
-		New-Item -Type Directory -Path $dir 2> $null
+		# All directories must exist for Copy-Item to work
+		# There's no reliable way to know whether a path is a directory or file
+		# dst must be a directory so we can reliably create it
+		New-Item -Path $dst -ItemType Directory -Force > Out-Null
 
 		#New-Item -ItemType HardLink -Force -Path $config.dst -Target $config.src
 		Copy-Item -Force -Path $src -Destination $dst
@@ -90,51 +119,70 @@ function Restore-Config
 	}
 }
 
+function Install-Package($Name)
+{
+	Write-Host "`nInstalling ${Name}"
+	winget install -s winget -e $Name
+}
+
 function Setup-Software
 {
-	# No Packages (24-10-12)
+	# No Packages (25-10-23)
 	# Nvidia Drivers
-	# Razer Synapse 4
 	# OBSBOT
 
 	# Common
-	winget install -s winget -e "7zip.7zip"
-	winget install -s winget -e "dotPDN.PaintDotNet"
-	winget install -s winget -e "Git.Git"
-	winget install -s winget -e "JanDeDobbeleer.OhMyPosh"
-	winget install -s winget -e "Microsoft.PowerShell"
-	winget install -s winget -e "Microsoft.VisualStudioCode"
-	winget install -s winget -e "Microsoft.WindowsTerminal"
-	winget install -s winget -e "NickeManarin.ScreenToGif"
-	winget install -s winget -e "Spotify.Spotify"
-	winget install -s winget -e "TortoiseGit.TortoiseGit"
-	winget install -s winget -e "WinMerge.WinMerge"
+	Install-Package "7zip.7zip"
+	Install-Package "dotPDN.PaintDotNet"
+	Install-Package "Git.Git"
+	Install-Package "JanDeDobbeleer.OhMyPosh"
+	Install-Package "Microsoft.PowerShell"
+	Install-Package "Microsoft.VisualStudioCode"
+	Install-Package "Microsoft.WindowsTerminal"
+	Install-Package "Mozilla.Firefox"
+	Install-Package "NickeManarin.ScreenToGif"
+	Install-Package "RazerInc.RazerInstaller.Synapse4"
+	Install-Package "Spotify.Spotify"
+	Install-Package "TortoiseGit.TortoiseGit"
+	Install-Package "WinMerge.WinMerge"
 
-	if ($work)
+	switch ($Env)
 	{
-		# Work
-		winget install -s winget -e "Microsoft.VisualStudio.2022.Enterprise"
-		winget install -s winget -e "Perforce.P4V"
-	}
-	else
-	{
-		# Personal
-		winget install -s winget -e "Argotronic.ArgusMonitor"
-		winget install -s winget -e "Discord.Discord"
-		winget install -s winget -e "Mozilla.Firefox"
-		winget install -s winget -e "Guru3D.Afterburner"
-		winget install -s winget -e "NirSoft.NirCmd"
-		winget install -s winget -e "Valve.Steam"
-		winget install -s winget -e "VideoLAN.VLC"
-		winget install -s winget -e "Hugo.Hugo.Extended"
-		winget install -s winget -e "Microsoft.VisualStudio.2022.Community"
+		"Home"
+		{
+			Install-Package "Argotronic.ArgusMonitor"
+			Install-Package "Discord.Discord"
+			Install-Package "Guru3D.Afterburner"
+			Install-Package "Hugo.Hugo.Extended"
+			Install-Package "Microsoft.VisualStudio.2022.Community"
+			Install-Package "NirSoft.NirCmd"
+			Install-Package "Valve.Steam"
+			Install-Package "VideoLAN.VLC"
+		}
+
+		"Work"
+		{
+			Install-Package "Microsoft.VisualStudio.2022.Enterprise"
+			Install-Package "Perforce.P4V"
+
+			# TODO: Setup perforce
+			# p4 set P4CONFIG=.p4config
+			# p4 set P4IGNORE=.p4ignore.txt
+			# p4 set P4EDITOR=C:\Users\adam.byrd\AppData\Local\Programs\Microsoft VS Code\Code.exe -w
+			# p4 set P4PORT=perforce-useredge-sanjose.epicgames.net:1666
+		}
 	}
 
 	# PowerShell
+	Write-Host "`nAdding PSGallery repository"
 	# TODO: Is this still needed?
 	#Set-ExecutionPolicy Bypass
 	Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+
+	Write-Host "`nInstalling posh-git"
 	Install-Module -Repository PSGallery "posh-git"
+
+	Write-Host "`nInstalling Terminal-Icons"
 	Install-Module -Repository PSGallery "Terminal-Icons"
 
 	# TODO: Can this be done in a config file?
@@ -145,6 +193,8 @@ function Setup-Software
 
 function Setup-Environment
 {
+	Write-Host "`nSetting up environment"
+
 	$SysEnv = [System.Environment]
 	$EnvVar = [System.EnvironmentVariableTarget]
 
@@ -177,6 +227,8 @@ function Setup-Config
 
 function Setup-Fonts
 {
+	Write-Host "`nInstalling fonts"
+
 	$tempDir = "fonts"
 	New-Item $tempDir -ItemType Directory -Force | Out-Null
 	Push-Location $tempDir
@@ -210,23 +262,27 @@ function Setup-Fonts
 
 function Setup-Help
 {
-	# Suppress errors to workaround a problem with PSReadLine
-	# https://github.com/PowerShell/PSReadLine/issues/3359
-	Update-Help 2> $null
+	Write-Host "`nSetting up help"
+
+	Update-Help
 }
 
 function Setup-Registry
 {
+	Write-Host "`nSetting up registry"
+
 	&"res\windows\registry-utilities.ps1"
 	$registryFiles = Get-ChildItem "res\windows\*.reg"
 	foreach ($registryFile in $registryFiles)
 	{
+		Write-Host "`nApplying '$registryFile'"
 		regedit /s $registryFile
 	}
 
 	$registryScripts = Get-ChildItem "res\windows\*.ps1" -Exclude "registry-utilities.ps1"
 	foreach ($registryScript in $registryScripts)
 	{
+		Write-Host "`nRunning '$registryScript'"
 		.$registryScript
 	}
 }
