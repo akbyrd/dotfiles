@@ -85,6 +85,7 @@ vscode-ext - Fold lambdas inside variable declarations
 vscode-ext - parent parent child broken
 vscode-ext - Does "visible ranges" make it possible to fix the highlight on folded symbols?
 vscode-ext - See if there is a persistent state store for documents to avoid re-applying highlights
+vscode-ext - Toggle #if false around block
 vscode-ext - Move Line Up/Down - fix with vertical selection
 vscode-ext - Move Line Up/Down - fix cursor on second line with no selection
 vscode-ext - Move Line Up/Down - respect folding

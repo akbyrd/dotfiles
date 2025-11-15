@@ -1,0 +1,92 @@
+computeCursorState is returning the original position, so that's probably not the issue
+cursor.ts - CommandExecutor
+computeCursorState is called even if trackSelection is not used
+There are 2 commands and each has 2 operations
+The second command sets major identifier to 1, which is what we want
+The second command never gets a chance to run because the operations overlap and are removed
+
+NOTE: Try merging adjacent lines
+	Indentation must be handled on the text being moved. We can't have overlapping edits.
+NOTE: Try careful remove/insertion ordering to avoid affecting neightboring lines
+	Still have to sort cursors and do it in order. Otherwise some moves will cancel each other out
+	It doesn't look like this is possible. Can't insert after a line inserted by a previous command
+	Still super inefficient (indentaton, repeated moves, etc)
+NOTE: Try performing all inserts then all removes
+	Seems like a silly solution
+NOTE: Try issuing separate command lists for each cursor
+	Same as sorting cursors and doing moves sequentially
+	Still have to sort cursors and do it in order. Otherwise some moves will cancel each other out
+	Still super inefficient (indentaton, repeated moves, etc)
+	Actually, maybe it's more reasonable than I thought at first.
+	TODO: Try this. Compare results
+
+Approach 1
+TODO: Understand onEnter rules
+TODO: Get onEnter rules working
+TODO: Use IVirtualModel for onEnter?
+
+Approach 2
+TODO: Move a single line, like before
+
+Approach 3
+TODO: Issue a separate command for each moved line
+
+
+TODO: Test multiple cursors
+TODO: Do cursors update when text in front of them changes?
+----
+TODO: Split handling of the moved block and the adjacent line
+TODO: Handle cursor in the middle of indentation that's being removed
+TODO: Test multiple cursors on the same line
+TODO: Test non-zero selection
+TODO: Test reverse selection
+TODO: Handle moving a folded range
+TODO: Handle moving past folded ranges
+TODO: Prevent undo stops when nothing changes
+
+
+
+Source Notes
+------------
+// In order for this command to work properly we need to know about adjacent cursors.
+// * Edit operations are not allowed to overlap and when we have adjacent cursors their edits invariably end up
+//   overlapping. Consider lines 2 and 3 have a cursor and we want to move those lines up up. When line 2 is
+//   processed Line 1 is removed and reinserted below 2. When line 3 is processed we try to remove line 2 and
+//   reinsert it below 3. Since line 2 already has pending edits this is rejected and the second cursor is
+//   removed.
+// * When re-indenting lines after a move we look at the indentation of the previous line. If the previous line
+//   was also moved and got reindented we need to see the new indentation in order to make the right decision
+//   about our own indentation.
+
+// TODO: Maybe moving only the adjacent line is better?
+// * Can re-indent all other lines in-place
+// * Cursors should be updated automatically
+
+// TODO: Pick up all affected lines, modify them, put them down
+// * Don't have to handle first and last lines specially
+// * Simplest implementation
+// * A lot more work overall (if we're not re-indenting)
+// * Need shared state to update cursor positions (due to indentation changes)
+
+// TODO: I'm assuming an ICommand is not the right place to implement this. There must be tools have a broader
+// view of the document
+
+// TODO: I'm undecided about gathering all lines in an array.
+// On one hand it's wasteful if we're not reindenting
+// On the other we *have* to do it when reindenting because we need to see the re-indented state of previous lines
+
+
+
+Classes
+-------
+ICommand
+IEditOperationBuilder
+	trackSelection
+
+
+
+On Enter Rules
+--------------
+The desired indentation and predix when pressing enter
+Used for comment continuation
+Respects multiple languages in the same file

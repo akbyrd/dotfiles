@@ -59,6 +59,7 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 # Tab auto-completion for hugo
-if ((Test-Path "hugo.toml") -or (Test-Path "config/_default/hugo.toml")) {
+if ((Test-Path "hugo.toml") -or (Test-Path "config/_default/hugo.toml"))
+{
 	hugo completion powershell | Out-String | Invoke-Expression
 }
