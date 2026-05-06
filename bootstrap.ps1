@@ -19,34 +19,16 @@
 function Install-WinGet
 {
 	# NOTE: Windows now comes with winget, but the Sandbox does not.
-
-	# Using github instead of the store since it's not guaranteed to be installed (Windows Sandbox,
-	# corporate environments, etc).
 	# https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
 
-	# We have to manually grab dependencies. This is fragile and will hopefully be fixed one day.
-	# https://github.com/microsoft/winget-cli/issues/401
-	$wingetUrls = @(
-		"https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx",
-		"https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx",
-		"https://aka.ms/getwinget"
-	)
+	Write-Host "Installing WinGet"
+	$progressPreference = 'silentlyContinue'
 
-	# Disable progress because it slows downloads to a crawl
-	$progressPreference = "silentlyContinue"
-	$tempDir = "dotfiles-temp"
-	Write-Information "Downloading WinGet and its dependencies..."
-	New-Item $tempDir -ItemType Directory -Force | Out-Null
-	for ($i = 0; $i -lt $wingetUrls.Length; $i++)
-	{
-		$url = $wingetUrls[$i]
-		$filename = "$tempDir\WingetFile_$i.msixbundle";
+	Install-PackageProvider -Force -Name NuGet
+	Install-Module -Force -Name Microsoft.WinGet.Client -Repository PSGallery
+	Repair-WinGetPackageManager -AllUsers
 
-		Invoke-WebRequest -Uri $url -OutFile $filename
-		Add-AppxPackage $filename
-		Remove-Item $filename
-	}
-	Remove-Item $tempDir
+	Write-Host ""
 	$progressPreference = "Continue"
 }
 
