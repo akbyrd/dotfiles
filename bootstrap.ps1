@@ -18,6 +18,8 @@
 
 function Install-WinGet
 {
+	# NOTE: Windows now comes with winget, but the Sandbox does not.
+
 	# Using github instead of the store since it's not guaranteed to be installed (Windows Sandbox,
 	# corporate environments, etc).
 	# https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
@@ -66,12 +68,12 @@ if (!$winget)
 }
 
 winget install -s winget "Git.Git"; ""
-winget install -s winget -e "Microsoft.PowerShell"; ""
 Reload-Path
+# TODO: Try to remove this and replace the pwsh call below with the Windows version
+winget install -s winget -e "Microsoft.PowerShell"; ""
 
 git clone "https://github.com/akbyrd/dotfiles.git"
 Push-Location "dotfiles"
 Set-ExecutionPolicy Bypass
 pwsh -Command { &"setup.ps1" }
 Pop-Location
-Reload-Path

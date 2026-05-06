@@ -94,10 +94,10 @@ function Restore-Config
 {
 	foreach ($config in $configs)
 	{
-		Write-Host "`nRestoring config '$($config.src)'"
-
 		$src = "$env:DotfilesDir\$($config.src)"
 		$dst = $config.dst
+
+		Write-Host "`nRestoring config '$src' -> '$dst'"
 
 		if ($config.pre)
 		{
@@ -119,21 +119,23 @@ function Restore-Config
 	}
 }
 
-function Install-Package($Name)
+function Install-Package($Name, $InstallArgs = @())
 {
-	Write-Host "`nInstalling ${Name}"
-	winget install -s winget -e $Name
+	Write-Host "`nInstalling $Name $InstallArgs"
+	winget install -s winget -e $Name @InstallArgs
 }
 
 function Setup-Software
 {
-	# No Packages (25-10-23)
+	# No Packages (2025-10-23)
 	# Nvidia Drivers
 	# OBSBOT
 
 	# Common
 	Install-Package "7zip.7zip"
+	Install-Package "Anthropic.ClaudeCode"
 	Install-Package "dotPDN.PaintDotNet"
+	Install-Package "Fork.Fork"
 	Install-Package "Git.Git"
 	Install-Package "JanDeDobbeleer.OhMyPosh"
 	Install-Package "Microsoft.PowerShell"
@@ -154,7 +156,7 @@ function Setup-Software
 			Install-Package "Discord.Discord"
 			Install-Package "Guru3D.Afterburner"
 			Install-Package "Hugo.Hugo.Extended"
-			Install-Package "Microsoft.VisualStudio.2022.Community"
+			Install-Package "Microsoft.VisualStudio.2026.Community"
 			Install-Package "NirSoft.NirCmd"
 			Install-Package "Valve.Steam"
 			Install-Package "VideoLAN.VLC"
@@ -162,14 +164,14 @@ function Setup-Software
 
 		"Work"
 		{
-			Install-Package "Microsoft.VisualStudio.2022.Enterprise"
+			Install-Package "Microsoft.VisualStudio.2026.Enterprise"
 			Install-Package "Perforce.P4V"
 
 			# TODO: Setup perforce
 			# p4 set P4CONFIG=.p4config
 			# p4 set P4IGNORE=.p4ignore.txt
 			# p4 set P4EDITOR=C:\Users\adam.byrd\AppData\Local\Programs\Microsoft VS Code\Code.exe -w
-			# p4 set P4PORT=perforce-useredge-sanjose.epicgames.net:1666
+			# p4 set P4PORT=foo.com:1666
 		}
 	}
 
@@ -204,18 +206,18 @@ function Setup-Environment
 	# Dotfiles
 	$dotfilesDir = Split-Path $MyInvocation.ScriptName
 	$SysEnv::SetEnvironmentVariable("DotfilesDir", $dotfilesDir, $EnvVar::User)
+	$env:DotfilesDir = $dotfilesDir
 
-	# Bin
+	# Path - Bin
 	$userPath = "$userPath;$dotfilesDir\bin"
 
-	# MSBuild
+	# Path - MSBuild
 	$vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
 	$vsInstallDir = (.$vswhere -latest -property installationPath)
+	$msBuildDir   = "$vsInstallDir\Msbuild\Current\Bin"
+	$userPath     = "$userPath;$msBuildDir"
 
-	$msBuildDir = "$vsInstallDir\Msbuild\Current\Bin"
-	$userPath = "$userPath;$msBuildDir"
-
-	# Apply changes
+	# Path - Apply changes
 	$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
 	$env:Path = "$machPath;$userPath"
 }
