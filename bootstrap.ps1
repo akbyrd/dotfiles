@@ -24,8 +24,15 @@ function Install-WinGet
 	Write-Host "Installing WinGet"
 	$progressPreference = 'silentlyContinue'
 
-	Install-PackageProvider -Force -Name NuGet
+	Install-PackageProvider -Force -Name NuGet | Out-Null
 	Install-Module -Force -Name Microsoft.WinGet.Client -Repository PSGallery
+	# TODO: This seems to raise a spurious error
+	# Repair-WinGetPackageManager : One or more errors occurred.
+	# At line:29 char:2
+	# +     Repair-WinGetPackageManager -AllUsers
+	# +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	#     + CategoryInfo          : NotSpecified: (:) [Repair-WinGetPackageManager], AggregateException
+	#     + FullyQualifiedErrorId : System.AggregateException,Microsoft.WinGet.Client.Commands.RepairWinGetPackageManagerCmdlet
 	Repair-WinGetPackageManager -AllUsers
 
 	Write-Host ""
@@ -51,11 +58,9 @@ if (!$winget)
 
 winget install -s winget "Git.Git"; ""
 Reload-Path
-# TODO: Try to remove this and replace the pwsh call below with the Windows version
-winget install -s winget -e "Microsoft.PowerShell"; ""
-
 git clone "https://github.com/akbyrd/dotfiles.git"
+
 Push-Location "dotfiles"
 Set-ExecutionPolicy Bypass
-pwsh -Command { &"setup.ps1" }
+&".\setup.ps1"
 Pop-Location
