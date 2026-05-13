@@ -51,23 +51,31 @@ class Config
 
 # NOTE: dst must be a directory
 $configs = [Config[]] (
+	@{ # Claude
+		src = "res\claude\script"
+		dst = "~\.claude"
+	},
+	@{ # Claude
+		src = "res\claude\settings.json"
+		dst = "~\.claude"
+	},
 	@{ # Git
 		src = "res\.gitconfig"
 		dst = "~"
 	},
-	@{ # Windows Terminal
-		src = "res\windows-terminal\settings.json"
-		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
-		pre = { Stop-Process -Name WindowsTerminal 2> Out-Null }
+	@{ # Oh My Posh
+		src = "res\pwsh\theme.omp.json"
+		dst = Split-Path $Profile.CurrentUserAllHosts
 	},
 	@{ # PowerShell
 		src  = "res\pwsh\profile.ps1"
 		dst = Split-Path $Profile.CurrentUserAllHosts
 		post = { .$Profile.CurrentUserAllHosts }
 	},
-	@{ # Oh My Posh
-		src = "res\pwsh\theme.omp.json"
-		dst = Split-Path $Profile.CurrentUserAllHosts
+	@{ # Windows Terminal
+		src = "res\windows-terminal\settings.json"
+		dst = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
+		pre = { Stop-Process -Name WindowsTerminal -ErrorAction SilentlyContinue }
 	}
 )
 
@@ -75,18 +83,22 @@ function Backup-Config
 {
 	foreach ($config in $configs)
 	{
-		Write-Host "`nBacking up config '$($config.src)'"
-
 		$src = $config.dst
 		$dst = "$env:DotfilesDir\$($config.src)"
 
 		# If src is a folder grab the file name from dst
 		if (!(Test-Path -PathType Leaf $src))
 		{
-			$src += "\$(Split-Path -Leaf $dst)"
+			$parent = (Split-Path -Parent $dst)
+			$leaf   = (Split-Path -Leaf   $dst)
+
+			$src = Join-Path $src $leaf
+			$dst = "$parent"
 		}
 
-		Copy-Item -Force -Path $src -Destination $dst
+		Write-Host "`nBacking up config '$src' -> '$dst'"
+
+		Copy-Item -Recurse -Force -Path $src -Destination $dst
 	}
 }
 
@@ -107,7 +119,7 @@ function Restore-Config
 		# All directories must exist for Copy-Item to work
 		# There's no reliable way to know whether a path is a directory or file
 		# dst must be a directory so we can reliably create it
-		New-Item -Path $dst -ItemType Directory -Force > Out-Null
+		New-Item -Path $dst -ItemType Directory -Force | Out-Null
 
 		#New-Item -ItemType HardLink -Force -Path $config.dst -Target $config.src
 		Copy-Item -Force -Path $src -Destination $dst
@@ -125,6 +137,29 @@ function Install-Package($Name, $InstallArgs = @())
 	winget install -s winget -e $Name @InstallArgs
 }
 
+function Append-Path($UserDirs, $MachDirs)
+{
+	$SysEnv = [System.Environment]
+	$EnvVar = [System.EnvironmentVariableTarget]
+
+	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
+	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
+
+	$UserDirs = @($userPath -split ";"; $UserDirs)
+	$MachDirs = @($machPath -split ";"; $MachDirs)
+
+	$UserDirs = $UserDirs | Where-Object { $_ } | Select-Object -Unique
+	$MachDirs = $MachDirs | Where-Object { $_ } | Select-Object -Unique
+
+	$userPath = $UserDirs -join ";"
+	$machPath = $MachDirs -join ";"
+
+	$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
+	$SysEnv::SetEnvironmentVariable("Path", $machPath, $EnvVar::Machine)
+	$env:Path = "$machPath;$userPath"
+#>
+}
+
 function Setup-Software
 {
 	# No Packages (2025-10-23)
@@ -133,11 +168,11 @@ function Setup-Software
 
 	# Common
 	Install-Package "7zip.7zip"
-	Install-Package "Anthropic.ClaudeCode"
 	Install-Package "dotPDN.PaintDotNet"
 	Install-Package "Fork.Fork"
 	Install-Package "Git.Git"
 	Install-Package "JanDeDobbeleer.OhMyPosh"
+	Install-Package "MHNexus.HxD"
 	Install-Package "Microsoft.PowerShell"
 	Install-Package "Microsoft.VisualStudioCode"
 	Install-Package "Microsoft.WindowsTerminal"
@@ -153,13 +188,21 @@ function Setup-Software
 		"Home"
 		{
 			Install-Package "Argotronic.ArgusMonitor"
+			Install-Package "Anthropic.Claude"
+			Install-Package "Anthropic.ClaudeCode"
 			Install-Package "Discord.Discord"
 			Install-Package "Guru3D.Afterburner"
 			Install-Package "Hugo.Hugo.Extended"
+			Install-Package "LLVM.LLVM"
 			Install-Package "Microsoft.VisualStudio.2026.Community"
 			Install-Package "NirSoft.NirCmd"
 			Install-Package "Valve.Steam"
 			Install-Package "VideoLAN.VLC"
+
+			# TODO: Remove when supported by the installed
+			# https://github.com/llvm/llvm-project/issues/54724
+			# https://gitlab.kitware.com/cmake/cmake/-/work_items/27817
+			Append-Path "%ProgramFiles%\LLVM\bin\"
 		}
 
 		"Work"
@@ -200,26 +243,21 @@ function Setup-Environment
 	$SysEnv = [System.Environment]
 	$EnvVar = [System.EnvironmentVariableTarget]
 
-	$machPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::Machine)
-	$userPath = $SysEnv::GetEnvironmentVariable("Path", $EnvVar::User)
+	$userPaths = @()
 
 	# Dotfiles
 	$dotfilesDir = Split-Path $MyInvocation.ScriptName
 	$SysEnv::SetEnvironmentVariable("DotfilesDir", $dotfilesDir, $EnvVar::User)
 	$env:DotfilesDir = $dotfilesDir
+	$userPaths += "$dotfilesDir\bin"
 
-	# Path - Bin
-	$userPath = "$userPath;$dotfilesDir\bin"
-
-	# Path - MSBuild
+	# MSBuild
 	$vswhere      = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-	$vsInstallDir = (.$vswhere -latest -property installationPath)
-	$msBuildDir   = "$vsInstallDir\Msbuild\Current\Bin"
-	$userPath     = "$userPath;$msBuildDir"
+	$vsInstallDir = (& $vswhere -latest -property installationPath)
+	$userPaths   += "$vsInstallDir\Msbuild\Current\Bin"
 
-	# Path - Apply changes
-	$SysEnv::SetEnvironmentVariable("Path", $userPath, $EnvVar::User)
-	$env:Path = "$machPath;$userPath"
+	# Path
+	Append-Path $userPaths $Null
 }
 
 function Setup-Config

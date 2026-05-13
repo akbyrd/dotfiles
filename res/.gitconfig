@@ -6,6 +6,8 @@
 	verbose = true
 [core]
 	editor = \"$LOCALAPPDATA\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+	autocrlf = false
+	eol = lf
 [diff]
 	algorithm = histogram
 	tool = winmerge
