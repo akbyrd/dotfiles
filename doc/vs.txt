@@ -1,0 +1,22 @@
+Build Insights Auto-Running on Build
+------------------------------------
+The "C++ Build Insights" component registers confusing commands
+https://developercommunity.visualstudio.com/t/Build-Insights-automatically-opening-any/11036681
+
+Build.Build                           - First project
+Build.Build                           - Selected project (focused file > selected proj > startup proj)
+Build.BuildAll                        -
+Build.Rebuild                         -
+Build.RebuildAll                      -
+Build.RunBuldInsightsonBuild          - Selected project (focused file > selected proj > startup proj)
+Build.RunBuldInsightsonRebuild        -
+Build.RunBuldInsightsonSelectedFiles  -
+Build.Improvebuildperformance         -
+
+  | cs               | ca                       |
+a | Rebuild File     | Profile Rebuild File     |
+s | Rebuild Project  | Profile Rebuild Project  |
+d | Rebuild Solution | Profile Rebuild Solution |
+z | Build   File     | Profile Build   File     |
+x | Build   Project  | Profile Build   Project  |
+c | Build   Solution | Profile Build   Solution |
