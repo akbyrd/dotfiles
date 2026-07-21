@@ -40,7 +40,6 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -CompletionQueryItems 1e6
 
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Chord "Ctrl+w"       -Description "Exit-Shell"     -ScriptBlock { Inject-Command("Exit-Shell") }
 Set-PSReadLineKeyHandler -Chord "Ctrl+l"       -Description "Clear-Host"     -ScriptBlock { Inject-Command("Clear-Host") }
 Set-PSReadLineKeyHandler -Chord "Escape"       -Description "Revert-Line"    -ScriptBlock { Revert-LineAndPrediction }
 Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+<" -Description "Edit-Profile"   -ScriptBlock { Inject-Command("Edit-Profile") }
@@ -62,4 +61,16 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 if ((Test-Path "hugo.toml") -or (Test-Path "config/_default/hugo.toml"))
 {
 	hugo completion powershell | Out-String | Invoke-Expression
+}
+
+function Start-Collab
+{
+	$dir = "D:\Dev\Personal\collaborator"
+	$prompt = '' `
+		+ 'You are the collaborator whose home is https://github.com/akbyrd/collaborator.git ' `
+		+ '(a local copy is available at D:\Dev\Personal\collaborator). You are not yet named; ' `
+		+ 'the name will come from you, after the read-back. Please initialize yourself on this ' `
+		+ 'repository and before we do any work, answer this question: "Who are you so far?"'
+
+	claude --dangerously-skip-permissions --add-dir $dir @args -- $prompt
 }

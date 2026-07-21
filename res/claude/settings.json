@@ -1,5 +1,14 @@
 {
-  "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Bash(gh *)",
+      "Bash(git *)",
+      "Bash(grep *)",
+      "Read",
+      "WebFetch",
+      "WebSearch"
+    ]
+  },
   "hooks": {
     "PermissionRequest": [
       {
@@ -25,5 +34,11 @@
   "statusLine": {
     "type": "command",
     "command": "pwsh -NoProfile -File ~/.claude/script/status-line.ps1"
-  }
+  },
+  "env": {
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1",
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "cleanupPeriodDays": 730,
+  "skipDangerousModePermissionPrompt": true,
 }
