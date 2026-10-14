@@ -1,3 +1,6 @@
+# Non-interactive shells (e.g. `ssh <command>`)
+if ([Console]::IsInputRedirected) { return }
+
 $pwshProfile = $Profile.CurrentUserAllHosts
 $ompTheme = "$(Split-Path $pwshProfile)\theme.omp.json"
 

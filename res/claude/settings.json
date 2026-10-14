@@ -40,5 +40,5 @@
     "DISABLE_AUTOUPDATER": "1"
   },
   "cleanupPeriodDays": 730,
-  "skipDangerousModePermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true
 }

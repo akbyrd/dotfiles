@@ -34,6 +34,17 @@
         },
         {
           "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ if .SSHSession }}{{ .HostName }} {{ end }}",
+          "foreground": "#19191b",
+          "powerline_symbol": "\ue0b0",
+          "background": "#d75f00",
+          "type": "session",
+          "style": "powerline"
+        },
+        {
+          "properties": {
             "cache_duration": "none",
             "folder_icon": "\u2026",
             "folder_separator_icon": " <transparent>\ue0b1</> ",
